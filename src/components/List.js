@@ -379,9 +379,43 @@ const shows_first = [
 
 class List extends Component {
 
+    constructor() {
+        super();
+        this.state = {data: []}
+      }
+
     componentWillMount(){
         Orientation.lockToPortrait()
     }
+
+    _readyData(){
+        this.state.data = this.getData()
+    }
+
+    async getData() {
+        try {
+          let response = await fetch(
+            'http://10.0.2.2/sampl2/public/api/videos'
+          );
+          let responseJson = await response.json();
+          console.log(responseJson)
+          return responseJson;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+    async fetchData() {
+        
+        await fetch('http://10.0.2.2/sampl2/public/api/videos')
+          .then((response) => response.json())
+          .then((responseJson) => {
+            return responseJson;
+          })
+          .catch((error) => {
+            console.error(error)
+          });
+      }
 
     _newPushContent(item){
         this.props.navigation.navigate(
@@ -390,6 +424,15 @@ class List extends Component {
                 item
             }}
         )
+    }
+
+    _try(){
+        return(
+            <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
+                <Image style={{width: 120, height: 180}} source={{uri: 'http://10.0.2.2/sampl2/'+this.data.thumbnailPath}}/>
+            </TouchableWithoutFeedback>
+        )
+        
     }
     
     _renderItem(item){
@@ -401,16 +444,34 @@ class List extends Component {
     }
 
     render(){
+        this._readyData
+        console.log(this.state.data)
         return(
             <View style={{flex: 1}}>
-                <Text style={styles.listTitle}>My list</Text>
-                <FlatList 
-                    keyExtractor={(item, index) => index.toString()}
-                    horizontal
-                    ItemSeparatorComponent ={() => <View style={{width: 5}} />}
-                    renderItem={({item}) => this._renderItem(item)} 
-                    data={shows_first}
-                />
+                <View>
+                    <Text style={styles.listTitle}>My list</Text>
+                    <FlatList 
+                        keyExtractor={(item, index) => index.toString()}
+                        horizontal
+                        ItemSeparatorComponent ={() => <View style={{width: 5}} />}
+                        renderItem={({item}) => this._renderItem(item)} 
+                        data={shows_first}
+                    />
+                </View>
+
+                <View>
+                    <Text style={styles.listTitle}>Second List</Text>
+                    <FlatList 
+                        keyExtractor={(item, index) => index.toString()}
+                        horizontal
+                        ItemSeparatorComponent ={() => <View style={{width: 5}} />}
+                        renderItem={({data}) => this.try(data)} 
+                        data={this.data}
+                    />
+                    <Text>
+                       {this.state.data}
+                    </Text>
+                </View>
             </View>
         )
     }
