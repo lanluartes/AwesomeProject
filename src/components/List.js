@@ -386,6 +386,9 @@ class List extends Component {
 
     componentWillMount(){
         Orientation.lockToPortrait()
+    }
+
+    componentDidMount(){
         this.getData()
     }
 
@@ -416,12 +419,10 @@ class List extends Component {
     }
 
     _try = data => {
-        //console.log(this.state.data[0].thumbnailPath)
-        const list = this.state.data.map(data => console.log(data.thumbnailPath));
-
+        console.log(data.thumbnailPath)
         return(
-            <TouchableWithoutFeedback onPress={() => this._newPushContent(data.thumbnailPath)}>
-                <Image style={{width: 120, height: 180}} source={{uri: 'http://10.0.2.2/sampl2/'+data[0].thumbnailPath}}/>
+            <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
+                <Image style={{width: 120, height: 180}} source={{uri: 'http://10.0.2.2/sampl2/'+data.thumbnailPath}}/>
             </TouchableWithoutFeedback>
         )
     }
@@ -454,7 +455,7 @@ class List extends Component {
                         keyExtractor={(item, index) => index.toString()}
                         horizontal
                         ItemSeparatorComponent ={() => <View style={{width: 5}} />}
-                        renderItem={({data}) => this._try(this.state.data)} 
+                        renderItem={({item}) => this._try(item)} 
                         data={this.state.data}
                     />
                 </View>
