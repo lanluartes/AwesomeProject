@@ -386,36 +386,25 @@ class List extends Component {
 
     componentWillMount(){
         Orientation.lockToPortrait()
+        this.getData()
     }
 
-    _readyData(){
-        this.state.data = this.getData()
-    }
+
 
     async getData() {
         try {
           let response = await fetch(
             'http://10.0.2.2/sampl2/public/api/videos'
           );
+
           let responseJson = await response.json();
-          console.log(responseJson)
-          return responseJson;
+          this.setState({ data: responseJson});
+
         } catch (error) {
           console.error(error);
         }
       }
 
-    async fetchData() {
-        
-        await fetch('http://10.0.2.2/sampl2/public/api/videos')
-          .then((response) => response.json())
-          .then((responseJson) => {
-            return responseJson;
-          })
-          .catch((error) => {
-            console.error(error)
-          });
-      }
 
     _newPushContent(item){
         this.props.navigation.navigate(
@@ -426,13 +415,15 @@ class List extends Component {
         )
     }
 
-    _try(){
+    _try = data => {
+        //console.log(this.state.data[0].thumbnailPath)
+        const list = this.state.data.map(data => console.log(data.thumbnailPath));
+
         return(
-            <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
-                <Image style={{width: 120, height: 180}} source={{uri: 'http://10.0.2.2/sampl2/'+this.data.thumbnailPath}}/>
+            <TouchableWithoutFeedback onPress={() => this._newPushContent(data.thumbnailPath)}>
+                <Image style={{width: 120, height: 180}} source={{uri: 'http://10.0.2.2/sampl2/'+data[0].thumbnailPath}}/>
             </TouchableWithoutFeedback>
         )
-        
     }
     
     _renderItem(item){
@@ -444,8 +435,6 @@ class List extends Component {
     }
 
     render(){
-        this._readyData
-        console.log(this.state.data)
         return(
             <View style={{flex: 1}}>
                 <View>
@@ -465,12 +454,9 @@ class List extends Component {
                         keyExtractor={(item, index) => index.toString()}
                         horizontal
                         ItemSeparatorComponent ={() => <View style={{width: 5}} />}
-                        renderItem={({data}) => this.try(data)} 
-                        data={this.data}
+                        renderItem={({data}) => this._try(this.state.data)} 
+                        data={this.state.data}
                     />
-                    <Text>
-                       {this.state.data}
-                    </Text>
                 </View>
             </View>
         )
