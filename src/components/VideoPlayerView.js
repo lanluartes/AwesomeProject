@@ -12,7 +12,6 @@ class VideoPlayerView extends Component{
 
     componentWillMount(){
         Orientation.lockToLandscape()
-        console.log(this.props)
     }
 
     componentWillUnmount(){
@@ -25,11 +24,12 @@ class VideoPlayerView extends Component{
     }
 
     render(){
+        const {navigation} = this.props
         return(
             <View style={styles.container}>
                 <VideoPlayer
-                source={require('./videos/video.mp4')}
-                title={<Text>Designated Survivor</Text>}
+                source={{uri: 'http://10.0.2.2/sampl2/'+navigation.state.params.passProps.item.VideoPath}}
+                title={<Text>{navigation.state.params.passProps.item.VideoTitle}</Text>}
                 navigator={this.props.navigator}
                 onBack={() => this._back()}
                 fullscreen={true}

@@ -409,17 +409,17 @@ class List extends Component {
       }
 
 
-    _newPushContent(item){
+    _newPushContent = item => {
         this.props.navigation.navigate(
            'Details',
            { passProps: {
                 item
-            }}
+                }
+            }
         )
     }
 
     _try = data => {
-        console.log(data.thumbnailPath)
         return(
             <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
                 <Image style={{width: 120, height: 180}} source={{uri: 'http://10.0.2.2/sampl2/'+data.thumbnailPath}}/>

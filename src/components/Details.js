@@ -28,19 +28,26 @@ class Details extends Component {
         Orientation.lockToPortrait()
     }
 
+    _gotoVideo(item) {
+        this.props.navigation.navigate(
+            'Video', 
+            { passProps: {
+                item
+                }
+            }
+        )
+    }
+
     render(){
         const {navigation} = this.props
-        const {name} = navigation.state.params.passProps.item
-        const {thumbnail, cast, description, year, creator, numOfEpisodes, season} = navigation.state.params.passProps.item.details
-   
         return(
             <ScrollView style={styles.container}>
                 <ImageBackground 
-                    style={styles.thumbnail}
-                    source={{uri: thumbnail}}
+                style={styles.thumbnail}
+                source={{uri: 'http://10.0.2.2/sampl2/'+navigation.state.params.passProps.item.thumbnailPath}}
                 >
                     <View style={styles.buttonPlay}>
-                        <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('Video')}>
+                        <TouchableWithoutFeedback onPress={() => this._gotoVideo(navigation.state.params.passProps.item)}>
                             <View>
                                     <Icon 
                                     style={styles.iconPlay}
@@ -54,7 +61,7 @@ class Details extends Component {
                 <View style={styles.nameContainer}>
                     <TextGradient colors={['transparent', '#181818', '#181818']}>
                         <Text style={[styles.text, styles.titleShow]}>
-                            {name}
+                            {navigation.state.params.passProps.item.VideoTitle}
                         </Text>
                     </TextGradient>
                 </View>
@@ -63,17 +70,17 @@ class Details extends Component {
 
                 <View style={styles.descriptionContainer}>
                     <View style={styles.subtitle}>
-                        <Text style={[styles.text, styles.subTitleText]}>{year}</Text>
-                        <Text style={[styles.text, styles.subTitleText]}>{numOfEpisodes}</Text>
-                        <Text style={[styles.text, styles.subTitleText]}>{season}</Text>
+                        <Text style={[styles.text, styles.subTitleText]}></Text>
+                        <Text style={[styles.text, styles.subTitleText]}></Text>
+                        <Text style={[styles.text, styles.subTitleText]}></Text>
                     </View>
 
                     <View style={styles.description}>
-                        <Text style={[styles.text, styles.light]}>{description}</Text>
+                        <Text style={[styles.text, styles.light]}>{navigation.state.params.passProps.item.VideoDescription}</Text>
                     </View>
 
-                    <Text style={styles.text}>Cast: {cast}</Text>
-                    <Text style={styles.text}>Creator: {creator}</Text>
+                    <Text style={styles.text}>Cast: {navigation.state.params.passProps.item.VideoAuthor}</Text>
+                    <Text style={styles.text}>Creator: {navigation.state.params.passProps.item.VideoAuthor}</Text>
 
                     <View style={styles.shareListIcon}>
                             <View style={styles.myListIcon}>
