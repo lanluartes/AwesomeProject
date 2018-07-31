@@ -419,7 +419,7 @@ class List extends Component {
         )
     }
 
-    _try = data => {
+    _showList = data => {
         return(
             <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
                 <Image style={{width: 120, height: 180}} source={{uri: 'http://10.0.2.2/sampl2/'+data.thumbnailPath}}/>
@@ -455,7 +455,7 @@ class List extends Component {
                         keyExtractor={(item, index) => index.toString()}
                         horizontal
                         ItemSeparatorComponent ={() => <View style={{width: 5}} />}
-                        renderItem={({item}) => this._try(item)} 
+                        renderItem={({item}) => this._showList(item)} 
                         data={this.state.data}
                     />
                 </View>

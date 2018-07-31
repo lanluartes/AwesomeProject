@@ -7,6 +7,7 @@ import Home from './Home';
 import linis from './linistips';
 import Kwentuhan from './KwentuhanTayo';
 import List from './src/components/List'
+import comicList from './src/components/comicList'
 import Details from './src/components/Details'
 import VideoPlayerView from './src/components/VideoPlayerView'
 import Orientation from 'react-native-orientation'
@@ -30,6 +31,7 @@ const AppNavigator = createStackNavigator({
   LinisTips: { screen: linis},
   KwentuhanTayo: {screen: Kwentuhan},
   List : {screen: List},
+  listComics: {screen: comicList},
   Details: {screen: Details},
 
 },
