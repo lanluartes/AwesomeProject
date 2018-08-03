@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Text, View, StyleSheet, FlatList, Image, TouchableWithoutFeedback,Navigator} from 'react-native'
+import {Text, View, StyleSheet, FlatList, Image, TouchableWithoutFeedback} from 'react-native'
 import { Fonts } from '../utils/Fonts';
 import Orientation from 'react-native-orientation'
 

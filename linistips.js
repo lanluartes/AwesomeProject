@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
-import {AppRegistry, StyleSheet, Text, View, TouchableOpacity, Image, Modal, TouchableHighlight, Dimensions } from 'react-native';
+import {AppRegistry, StyleSheet, Text, View, TouchableOpacity, Image, TouchableHighlight, Dimensions } from 'react-native';
 import { Fonts } from './src/utils/Fonts';
+import Modal from 'react-native-modal';
+import ComicList from './src/components/comicList';
 
 const {width, height} =  Dimensions.get('screen')
 
 
 class linis extends Component {
+
 
   static navigationOptions = { 
     headerRight: (<View><Image style={{width: 40, height: 40, marginRight: 10, alignSelf: 'center'}} source={require('./assets/Icons/info.png')}/></View>),
@@ -18,50 +21,17 @@ class linis extends Component {
         fontSize:25,
         marginBottom: 5
        }}>
+       Comics
     </Text>
   }
-  state = {
-    modalVisible: false,
-  };
 
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
 
   render() {
+
     return (
-      <View style={{marginTop: 22}}>
-        <View style={{borderRadius: 10}}>
-          <Modal
-            animationType="slide"
-            transparent
-            visible={this.state.modalVisible}
-            onRequestClose={() => {
-              alert('Modal has been closed.');
-              this.setModalVisible(false);
-            }}>
-
-            <View style={{margin: 22, marginBottom:22,  borderRadius: 10, backgroundColor: 'powderblue', height: height-100}}>
-              <View>
-                <Text>Hello World!</Text>
-
-                <TouchableHighlight
-                  onPress={() => {
-                    this.setModalVisible(!this.state.modalVisible);
-                  }}>
-                  <Text>Hide Modal</Text>
-                </TouchableHighlight>
-              </View>
-            </View>
-          </Modal>
-        </View>
-
-        <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(true);
-          }}>
-          <Text>Show Modal</Text>
-        </TouchableHighlight>
+      
+      <View>
+        <ComicList navigation={this.props.navigation}/>
       </View>
     );
   }
@@ -72,9 +42,15 @@ class linis extends Component {
     infoDesign: {
       width: 30,
       height: 30
-    }
+    },
 
-
+      listTitle: {
+              fontSize: 20,
+               fontFamily: Fonts.Quicksand,
+               color: 'black'
+      }
+  
+  
   })
 
   export default linis

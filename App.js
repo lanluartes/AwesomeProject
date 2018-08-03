@@ -2,15 +2,17 @@ import React from 'react';
 import {AppRegistry, StyleSheet, Text} from 'react-native';
 import {createStackNavigator} from 'react-navigation';
 
+import Orientation from 'react-native-orientation'
 import Splash from './Splash';
 import Home from './Home';
-import linis from './linistips';
+
 import Kwentuhan from './KwentuhanTayo';
-import List from './src/components/List'
-import comicList from './src/components/comicList'
 import Details from './src/components/Details'
+import List from './src/components/List'
 import VideoPlayerView from './src/components/VideoPlayerView'
-import Orientation from 'react-native-orientation'
+
+import linis from './linistips';
+import ComicList from './src/components/comicList'
 
 export default class App extends React.Component {
   componentWillMount(){
@@ -25,14 +27,16 @@ export default class App extends React.Component {
 }
 
 const AppNavigator = createStackNavigator({
-  
   HomeScreen: {screen: Home},
   Video: {screen: VideoPlayerView},
   LinisTips: { screen: linis},
   KwentuhanTayo: {screen: Kwentuhan},
-  List : {screen: List},
-  listComics: {screen: comicList},
+
   Details: {screen: Details},
+
+  List: {screen: List},
+  ComicList: {screen: ComicList}
+
 
 },
 
