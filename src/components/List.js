@@ -379,6 +379,11 @@ const shows_first = [
 
 class List extends Component {
 
+    static navigationOptions = {
+        headerStyle: {backgroundColor: '#181818'},
+        headerTintColor: 'white' 
+    }
+
     constructor() {
         super();
         this.state = {data: []}

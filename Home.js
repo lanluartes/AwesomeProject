@@ -1,11 +1,18 @@
 import React, { Component } from 'React';
 import {Alert, View, Text, StyleSheet, Image, TouchableOpacity, Button, AppState} from 'react-native';
 import { Fonts } from './src/utils/Fonts';
+import {createBottomTabNavigator} from 'react-navigation';
 import Swiper from 'react-native-swiper';
 import PushNotification from 'react-native-push-notification';
 import  PushController from './PushController';
 
+
+import Kwentuhan from './KwentuhanTayo';
+
 export default class Home extends React.Component{
+
+
+
     constructor(props){
         super(props);
     
@@ -98,35 +105,12 @@ export default class Home extends React.Component{
                 {/*this panel is used for holding the buttons that lead to other processes -stream video, read comics, play games-*/}
                 <View style={styles.mainBox}>
                     <View style={styles.insideBox}>
-                        <TouchableOpacity 
-                        style={styles.button}
-                        onPress={() => this.props.navigation.navigate('KwentuhanTayo')}>
-                        <Image 
-                        style={styles.buttonIcon}
-                        source={require('./assets/Icons/children.png')}/> 
-                        <Text style={styles.buttonText}>Magkwentuhan Tayo!</Text>
-                        </TouchableOpacity>
+           
 
-                        <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => this.props.navigation.navigate('LinisTips')}>
-                        <Image 
-                        style={styles.buttonIcon}
-                        source={require('./assets/Icons/lesson.png')}/>
-                        <Text  style={styles.buttonText}>Linis Tips</Text>
-                        </TouchableOpacity> 
                     </View>
 
                     <View style={styles.insideBox}>
-                        <TouchableOpacity 
-                        style={styles.button}
-                        onPress={this.onPress}>
-                        <Image 
-                        style={styles.buttonIcon}
-                        source={require('./assets/Icons/checklist.png')}/>
-                        <Text  style={styles.buttonText}>Talaan</Text>
-                        </TouchableOpacity> 
-
+              
                         <TouchableOpacity 
                         style={styles.button}
                         onPress={this.onPress}>
@@ -139,6 +123,7 @@ export default class Home extends React.Component{
                 </View>
 
                <PushController />
+
             </View>
 
        
@@ -146,8 +131,7 @@ export default class Home extends React.Component{
     }
   }
 
-
-
+ 
   const styles = StyleSheet.create({
         
         slide: {

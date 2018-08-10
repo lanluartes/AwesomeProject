@@ -10,7 +10,6 @@ import {View,
     } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome'
-import IonIcons from 'react-native-vector-icons/Ionicons'
 import TextGradient from 'react-native-linear-gradient'
 import { Fonts } from '../utils/Fonts';
 import Orientation from 'react-native-orientation'
@@ -18,12 +17,7 @@ import Orientation from 'react-native-orientation'
 const {width, height} =  Dimensions.get('window')
 
 class Details extends Component {
-    static navigationOptions = {
-        headerStyle: {backgroundColor: '#181818'},
-        headerTintColor: 'white'
-            
-}
-
+    
     componentWillMount(){
         Orientation.lockToPortrait()
     }
@@ -84,9 +78,9 @@ class Details extends Component {
 
                     <View style={styles.shareListIcon}>
                             <View style={styles.myListIcon}>
-                                    <IonIcons 
+                                    <Icon 
                                     style={styles.listIcon}
-                                    name='md-checkmark'
+                                    name='heart-o'
                                     color='#2c3e50'
                                     size={25}
                                     />
@@ -96,7 +90,7 @@ class Details extends Component {
                             <View style={styles.myShareIcon}>
                                 <Icon 
                                         style={styles.shareIcon}
-                                        name='share-alt'
+                                        name='share'
                                         color='#2c3e50'
                                         size={25}
                                         />

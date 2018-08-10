@@ -1,10 +1,8 @@
 import React from 'react';
-import {AppRegistry, StyleSheet, Text, View, TouchableOpacity, Image, Navigator } from 'react-native';
+import {AppRegistry, StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Fonts } from './src/utils/Fonts';
 
 import List from './src/components/List';
-import buildStyleInterpolator from 'buildStyleInterpolator'
-import Details from './src/components/Details'
 
 const NoTransition = {
   opacity: {
@@ -38,7 +36,7 @@ class Kwentuhan extends React.Component {
 
 
 render() {
-  
+    console.log(this.props.navigation)
       return (
             <List navigation={this.props.navigation}/>
       )
