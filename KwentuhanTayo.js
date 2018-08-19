@@ -36,7 +36,6 @@ class Kwentuhan extends React.Component {
 
 
 render() {
-    console.log(this.props.navigation)
       return (
             <List navigation={this.props.navigation}/>
       )

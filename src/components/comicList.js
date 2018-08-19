@@ -45,7 +45,7 @@ class ComicList extends Component{
     async getData() {
         try {
           let response = await fetch(
-            'http://10.0.2.2/sampl2/public/api/comics'
+            'http://10.0.2.2/wash-admin/public/api/comics'
           );
 
           let responseJson = await response.json();
@@ -59,13 +59,12 @@ class ComicList extends Component{
     _showList = data => {
         return(
             <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
-                <Image style={{width: 120, height: 180, borderRadius: 20}} source={{uri: 'http://10.0.2.2/sampl2/'+data.ComicPath}}/>
+                <Image style={{width: 120, height: 180, borderRadius: 20}} source={{uri: 'http://10.0.2.2/wash-admin/'+data.ComicThumbnailPath}}/>
             </TouchableWithoutFeedback>
         )
     }
 
     render(){
-        console.log(this.state.currentComicData.ComicPath)
         return(
         <View>
                 <Text style={styles.listTitle}>My Comics</Text>
@@ -98,7 +97,7 @@ class ComicList extends Component{
                                 {this.state.currentComicData.ComicAuthor}
                             </Text>
                             <Image
-                                source={{uri: 'http://10.0.2.2/sampl2/'+this.state.currentComicData.ComicPath}}
+                                source={{uri: 'http://10.0.2.2/wash-admin/'+this.state.currentComicData.ComicPath}}
                                 style={{width: 120, height: 180, borderRadius: 20}}
                             />
                                 

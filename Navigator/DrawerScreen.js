@@ -4,7 +4,6 @@ import {View, Text, Button } from 'react-native'
 export default class DrawerScreen extends React.Component {
 
     render(){
-        console.log(this.props)
         return(
             <View>
                 <Text> I AM HERE </Text>

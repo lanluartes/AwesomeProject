@@ -28,7 +28,7 @@ class VideoPlayerView extends Component{
         return(
             <View style={styles.container}>
                 <VideoPlayer
-                source={{uri: 'http://10.0.2.2/sampl2/'+navigation.state.params.passProps.item.VideoPath}}
+                source={{uri: 'http://10.0.2.2/wash-admin/'+navigation.state.params.passProps.item.VideoPath}}
                 title={<Text>{navigation.state.params.passProps.item.VideoTitle}</Text>}
                 navigator={this.props.navigator}
                 onBack={() => this._back()}

@@ -402,12 +402,11 @@ class List extends Component {
     async getData() {
         try {
           let response = await fetch(
-            'http://10.0.2.2/sampl2/public/api/videos'
+            'http://10.0.2.2/wash-admin/public/api/videos'
           );
 
           let responseJson = await response.json();
           this.setState({ data: responseJson});
-
         } catch (error) {
           console.error(error);
         }
@@ -427,7 +426,7 @@ class List extends Component {
     _showList = data => {
         return(
             <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
-                <Image style={{width: 120, height: 180}} source={{uri: 'http://10.0.2.2/sampl2/'+data.thumbnailPath}}/>
+                <Image style={{width: 120, height: 180}} source={{uri: 'http://10.0.2.2/wash-admin/'+data.thumbnailPath}}/>
             </TouchableWithoutFeedback>
         )
     }

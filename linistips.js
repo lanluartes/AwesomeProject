@@ -14,7 +14,6 @@ class linis extends Component {
   }
   
   render() {
-      console.log(this.props.navigation)
     return (
       
       <View>

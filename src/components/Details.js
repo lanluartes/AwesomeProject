@@ -34,11 +34,12 @@ class Details extends Component {
 
     render(){
         const {navigation} = this.props
+        console.log(navigation.state.params.passProps.item.VideoTitle, "###################TANGINA SOBRANG NAKAKALITO##############################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################################")
         return(
             <ScrollView style={styles.container}>
                 <ImageBackground 
                 style={styles.thumbnail}
-                source={{uri: 'http://10.0.2.2/sampl2/'+navigation.state.params.passProps.item.thumbnailPath}}
+                source={{uri: 'http://10.0.2.2/wash-admin/'+navigation.state.params.passProps.item.thumbnailPath}}
                 >
                     <View style={styles.buttonPlay}>
                         <TouchableWithoutFeedback onPress={() => this._gotoVideo(navigation.state.params.passProps.item)}>
@@ -73,6 +74,7 @@ class Details extends Component {
                         <Text style={[styles.text, styles.light]}>{navigation.state.params.passProps.item.VideoDescription}</Text>
                     </View>
 
+                    <Text style={styles.text}>{navigation.state.params.passProps.item.viewCount} views</Text>
                     <Text style={styles.text}>Cast: {navigation.state.params.passProps.item.VideoAuthor}</Text>
                     <Text style={styles.text}>Creator: {navigation.state.params.passProps.item.VideoAuthor}</Text>
 
