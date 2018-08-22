@@ -40,9 +40,10 @@ const AppNavigator = createStackNavigator({
 }
 );
 
-export default AppNavigator = createDrawerNavigator({
-    Test: {screen: AppNavigator}
-},
-{
-contentComponent: props => <DrawerScreen {...props} />
-})
+export default AppNavigator;
+//  = createDrawerNavigator({
+//     Test: {screen: AppNavigator}
+// },
+// {
+// contentComponent: props => <DrawerScreen {...props} />
+// })

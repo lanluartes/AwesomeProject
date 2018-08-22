@@ -1,4 +1,3 @@
-/* @flow */
 
 import React, { Component } from 'react';
 import {
@@ -7,52 +6,155 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  StatusBar
+  TouchableWithoutFeedback
 } from 'react-native';
+import * as Animatable from 'react-native-animatable'
+import Modal from 'react-native-modal'
 
 import { Fonts } from '../src/utils/Fonts'
 
 export default class LoginForm extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {username: "", password: ""};
+    this.state = {status: "disconnected"}
+    this.state = {modalVisible: false}
+  }
+
+  _logIn= data => {
+    const axios = require('axios');
+    const myData = new FormData();
+    myData.append("username",data.username);
+    myData.append("password",data.password);
+
+    axios({
+      method: 'POST',
+      url: 'http://10.0.2.2/wash-admin/public/login',
+      data: myData
+    })
+    .then(res => this._verifyLogIn(JSON.parse(res.data)));
+  }
+
+  _verifyLogIn = data =>{
+
+
+     if(data.connection === "connected"){
+       this.props.navigation.navigate('Tab');
+           
+    }else if(data.connection === "failed"){
+       this.setModalVisible(true)
+    }
+
+  }
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+}
+
   render() {
     return (
 
       <View style={styles.container}>
-      <StatusBar 
-      barStyle="light-content"
-      translucent
-      />
-        <TextInput 
-          placeholder="username or email"
-          placeholderTextColor="rgba(215, 218, 229, 0.7)"
-          style={styles.input}
-          returnKeyType="next"
-          onSubmitEditing={() => this.passwordInput.focus()}
-          keyboardType="email-address"
-          autoCapitalize="none"
-          autoCorrect={false}
-          underlineColorAndroid='transparent'
-        />
-         <TextInput 
-          placeholder="password"
-          placeholderTextColor="rgba(215, 218, 229, 0.7)"
-          style={styles.input}
-          returnKeyType="go"
-          secureTextEntry
-          autoCapitalize="none"
-          autoCorrect={false}
-          underlineColorAndroid='transparent'
-          ref={(input) => this.passwordInput = input}
-        />
 
-        <TouchableOpacity style={styles.buttonContainer}>
-            <Text style={styles.buttonText}>LOGIN</Text>
-        </TouchableOpacity>
+        <View>
+          <TextInput 
+            placeholder="username or email"
+            placeholderTextColor="rgba(215, 218, 229, 0.7)"
+            style={styles.input}
+            returnKeyType="next"        
+            onChangeText={(username) => this.setState({username})}
+            onSubmitEditing={() => this.passwordInput.focus()}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            underlineColorAndroid='transparent'
+          />
+          <TextInput 
+            placeholder="password"
+            placeholderTextColor="rgba(215, 218, 229, 0.7)"
+            style={styles.input}
+            returnKeyType="go"
+            onChangeText={(password) => this.setState({password})}
+            secureTextEntry
+            autoCapitalize="none"
+            autoCorrect={false}
+            underlineColorAndroid='transparent'
+            ref={(input) => this.passwordInput = input}
+          />
+
+          <TouchableOpacity style={styles.buttonContainer}
+            onPress={() => {this._logIn(this.state)}}
+          >
+              <Text style={styles.buttonText}>LOGIN</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Animatable.View animation="bounce">
+                    <Modal
+                    backdropColor='black'
+                    animationType="slide"
+                    isVisible={this.state.modalVisible}
+                    onRequestClose={() => {
+                        this.setModalVisible(false);
+                    }}
+                    onBackdropPress={() => {this.setModalVisible(false)}}
+                    >
+                  <Animatable.View animation="bounceInUp" style={styles.modalContent}>
+
+                            
+                            <Text style={styles.modalText}>
+                                There was something wrong logging in. Maybe your password or your username?😥
+                            </Text>      
+
+                          <TouchableWithoutFeedback
+                              onPress={() => {
+                              this.setModalVisible(!this.state.modalVisible);
+                              }}>
+                              <View style={styles.button}>
+                                  <Text style={styles.modalTitle}>Try again</Text>
+                              </View>
+                          </TouchableWithoutFeedback>
+                          
+
+                      </Animatable.View>
+                    </Modal>
+          </Animatable.View> 
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  button: {
+    backgroundColor: '#227AB5',
+    padding: 12,
+    margin: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  modalTitle: {
+    textAlign: 'center',
+    fontFamily: Fonts.Quicksand,
+    color: 'white'
+  },
+  modalText: {
+
+    textAlign: 'center',
+    fontFamily: Fonts.Quicksand,
+    fontSize: 17,
+
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
   container: {
     padding: 20
   },

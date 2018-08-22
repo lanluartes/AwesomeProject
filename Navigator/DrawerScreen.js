@@ -7,10 +7,10 @@ export default class DrawerScreen extends React.Component {
         return(
             <View>
                 <Text> I AM HERE </Text>
-                <Button 
+                {/* <Button 
                     title='Hello'
-                    onPress={console.log(this.props)}
-                />
+                    //onPress={console.log(this.props)}
+                /> */}
                 <View style={{height: 100 , backgroundColor: 'powderblue'}}>
                 </View>
             </View>
