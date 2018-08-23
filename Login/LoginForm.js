@@ -20,6 +20,11 @@ export default class LoginForm extends Component {
     this.state = {username: "", password: ""};
     this.state = {status: "disconnected"}
     this.state = {modalVisible: false}
+    this.state = {registration:{
+        newUsername: "",
+        newPassword: "",
+        confirmPassword: "",
+    }}
   }
 
   _logIn= data => {
@@ -50,6 +55,10 @@ export default class LoginForm extends Component {
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
+}
+
+_register = () => {
+  this.props.navigation.navigate('Register')
 }
 
   render() {
@@ -83,11 +92,25 @@ export default class LoginForm extends Component {
             ref={(input) => this.passwordInput = input}
           />
 
-          <TouchableOpacity style={styles.buttonContainer}
-            onPress={() => {this._logIn(this.state)}}
-          >
-              <Text style={styles.buttonText}>LOGIN</Text>
-          </TouchableOpacity>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
+
+            <View style={styles.registerButton}>
+              <TouchableOpacity
+                  onPress={() => {this._register()}}
+                >
+                    <Text style={styles.buttonText}>REGISTER</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  onPress={() => {this._logIn(this.state)}}
+                >
+                    <Text style={styles.buttonText}>LOGIN</Text>
+                </TouchableOpacity>
+            </View>
+
+          </View>
         </View>
 
         <Animatable.View animation="bounce">
@@ -126,6 +149,12 @@ export default class LoginForm extends Component {
 }
 
 const styles = StyleSheet.create({
+  registerButton: {
+    paddingVertical: 13,
+    flex: 1,
+    backgroundColor: '#028090'
+  },
+
   button: {
     backgroundColor: '#227AB5',
     padding: 12,
@@ -135,18 +164,19 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: 'rgba(0, 0, 0, 0.1)',
   },
+
   modalTitle: {
     textAlign: 'center',
     fontFamily: Fonts.Quicksand,
     color: 'white'
   },
-  modalText: {
 
+  modalText: {
     textAlign: 'center',
     fontFamily: Fonts.Quicksand,
     fontSize: 17,
-
   },
+
   modalContent: {
     backgroundColor: 'white',
     padding: 22,
@@ -155,9 +185,11 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     borderColor: 'rgba(0, 0, 0, 0.1)',
   },
+
   container: {
     padding: 20
   },
+
   input: {
     height: 40,
     backgroundColor: 'rgba(215, 218, 229, 0.7)',
@@ -166,10 +198,13 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Quicksand,
     fontSize: 17
   },
+
   buttonContainer: {
     backgroundColor: '#227AB5',
-    paddingVertical: 13
+    paddingVertical: 13,
+    flex: 1
   },
+  
   buttonText: {
     fontFamily: Fonts.Quicksand,
     fontSize: 18,

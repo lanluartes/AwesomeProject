@@ -4,6 +4,7 @@ import List from '../src/components/List'
 import VideoPlayerView from '../src/components/VideoPlayerView'
 import ComicList from '../src/components/comicList'
 import Login from '../Login/Login.js'
+import Register from '../Login/Register'
 
 import TabNavigator from './TabNavigator'
 import DrawerNavigator from './DrawerNavigator'
@@ -17,10 +18,16 @@ const AppNavigator = createStackNavigator({
   //   header: null
   //   }},
   Login: {
-    screen: Login,
-    navigationOptions:{
+     screen: Login,
+     navigationOptions:{
     header: null
-    }
+       }
+    },
+  Register: {
+    screen: Register,
+    navigationOptions:{
+      header: null
+    }  
   },
   Tab: {screen: TabNavigator,
     navigationOptions:{
