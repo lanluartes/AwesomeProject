@@ -171,7 +171,6 @@ export default class Home extends React.Component{
             height: 25,
             marginLeft: 8,
             marginTop: 10
-
             },
 
         resizeDare:{

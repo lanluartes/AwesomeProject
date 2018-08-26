@@ -397,8 +397,6 @@ class List extends Component {
         this.getData()
     }
 
-
-
     async getData() {
         try {
           let response = await fetch(

@@ -17,6 +17,10 @@ const AppNavigator = createStackNavigator({
   //   navigationOptions:{
   //   header: null
   //   }},
+  Tab: {screen: TabNavigator,
+    navigationOptions:{
+    header: null
+    }},
   Login: {
      screen: Login,
      navigationOptions:{
@@ -29,10 +33,6 @@ const AppNavigator = createStackNavigator({
       header: null
     }  
   },
-  Tab: {screen: TabNavigator,
-    navigationOptions:{
-    header: null
-    }},
   List: {screen: List},
   Details: {screen: Details,
     navigationOptions:{

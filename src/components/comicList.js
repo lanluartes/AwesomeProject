@@ -4,7 +4,8 @@ import { Fonts } from '../utils/Fonts';
 import Orientation from 'react-native-orientation'
 import * as Animatable from 'react-native-animatable'
 import Modal from 'react-native-modal'
-import ComicDetails from './comicDetails'
+import Ionicon from 'react-native-vector-icons/Ionicons'
+import ChapterList from './ChapterList'
 
 const {width, height} =  Dimensions.get('screen')
 
@@ -14,8 +15,7 @@ class ComicList extends Component{
     //storage for API data
     constructor() {
         super();
-        this.state = {comicData: []}
-        this.state = {currentComicData: []}
+        this.state = {comicData: [], currentComicData: []}
       }
 
     
@@ -26,8 +26,7 @@ class ComicList extends Component{
 
     //to identify unique object
     _newPushContent = item => {
-        this.setModalVisible(true)
-        this.setState({currentComicData: item});
+        this.setState({modalVisible: true, currentComicData: item})
     }
 
     //state of modal
@@ -36,9 +35,9 @@ class ComicList extends Component{
       };
 
     
-    //state handled of modal
-    setModalVisible(visible) {
-        this.setState({modalVisible: visible});
+    //state handler of modal
+    setModalVisible = visibility => {
+        this.setState({modalVisible: visibility});
     }
 
     //to get api data 
@@ -54,17 +53,26 @@ class ComicList extends Component{
           console.error(error);
         }
       }
+    
+    
+    getChapter = currentID => {
+
+    }
 
     //to enlist the collection of API objects
     _showList = data => {
         return(
             <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
-                <Image style={{width: 120, height: 180, borderRadius: 20}} source={{uri: 'http://10.0.2.2/wash-admin/'+data.ComicThumbnailPath}}/>
+                 <View style={{backgroundColor: '#1d3557', paddingBottom: 3}}>
+                    <Image style={styles.imageResize} source={{uri: 'http://10.0.2.2/wash-admin/'+data.ComicThumbnailPath}}/>
+                    <Text numberOfLines={1} style={styles.textForThumbnail} allowFontScaling adjustsFontSizeToFit minimumFontScale={.5}> {data.ComicTitle} </Text>
+                </View>
             </TouchableWithoutFeedback>
         )
     }
 
     render(){
+        console.log(this.props)
         return(
         <View>
                 <Text style={styles.listTitle}>My Comics</Text>
@@ -87,32 +95,51 @@ class ComicList extends Component{
                         this.setModalVisible(false);
                     }}
                     onBackdropPress={() => {this.setModalVisible(false)}}
-                    style={{margin: 22, marginBottom:22,  borderRadius: 20, backgroundColor: '#636e72'}}
+                    style={styles.modalContainer}
                     >
-                    <ScrollView>
-                    <Animatable.View animation="bounceInUp"  style={{flex: 1, margin: 20}}>
+                        <Animatable.View animation="bounceInUp"  style={{flex: 1, margin: 20, flexDirection: 'column'}}>
 
-                        <View>
-                            <Text style={styles.titleShow}>
-                                {this.state.currentComicData.ComicAuthor}
-                            </Text>
-                            <Image
-                                source={{uri: 'http://10.0.2.2/wash-admin/'+this.state.currentComicData.ComicPath}}
-                                style={{width: 120, height: 180, borderRadius: 20}}
-                            />
-                                
-                        <TouchableWithoutFeedback
-                            onPress={() => {
-                            this.setModalVisible(!this.state.modalVisible);
-                            }}>
-                            <View>
-                            <Text style={styles.text}>Hide Modal</Text>
+                            {/* Modal header */}
+                            <View style={{flex: 2, flexDirection: 'row'}}>
+                                <View style={{flex: 3}}>
+                                    <Text numberOfLines={1} allowFontScaling adjustsFontSizeToFit minimumFontScale={.5} style={[styles.titleShow]}>
+                                        {this.state.currentComicData.ComicTitle}
+                                    </Text>
+                                    <Text numberOfLines={1} allowFontScaling adjustsFontSizeToFit minimumFontScale={.5} style={styles.subtitleShow}>
+                                       Author: 
+                                       {this.state.currentComicData.ComicAuthor}
+                                    </Text>
+                                    <Text allowFontScaling adjustsFontSizeToFit minimumFontScale={.5} style={[styles.subtitleShow, {fontSize: 14}]}>
+                                       Description: {this.state.currentComicData.ComicDescription}
+                                    </Text>
+                                </View>
+                                <View style={{flex: 1}}>
+                                    <Image
+                                        source={{uri: 'http://10.0.2.2/wash-admin/'+this.state.currentComicData.ComicThumbnailPath}}
+                                        style={{width: 75, height: 125, borderRadius: 2}}
+                                        />
+                                </View>    
+                             </View>
+
+                            {/* CONTAINER FOR CHAPTER LIST */}
+                            <View style={{flex: 4}}>
+                           
+                                    <ChapterList currentComicData = {this.state.currentComicData} />
+                           
                             </View>
-                        </TouchableWithoutFeedback>
-                        </View>
 
-                    </Animatable.View>
-                    </ScrollView>
+                               <View style={{alignSelf: 'center'}}>
+                                    <TouchableWithoutFeedback
+                                        onPress={() => {
+                                        this.setModalVisible(!this.state.modalVisible);
+                                        }}>
+                                        <View>
+                                            <Ionicon name={'ios-arrow-down'} size={30} color={'#F5FCFF'}/>
+                                        </View>
+                                    </TouchableWithoutFeedback>
+                                </View>
+
+                        </Animatable.View>
                     </Modal>
                 </Animatable.View> 
 
@@ -123,6 +150,19 @@ class ComicList extends Component{
 }
 
 const styles = StyleSheet.create({
+    modalContainer: {
+        margin: 22,
+        marginBottom:22, 
+        borderRadius: 20, 
+        backgroundColor: '#1d3557'
+    },
+
+    imageResize: {
+        width: 120, 
+        height: 180, 
+        borderRadius: 2, 
+        backgroundColor: 'white'
+    },
 
     listTitle: {
              fontSize: 20,
@@ -133,7 +173,9 @@ const styles = StyleSheet.create({
     text: {
         color: '#F5FCFF',
         fontSize: 18,
-        fontFamily: Fonts.QuicksandReg
+        fontFamily: Fonts.QuicksandReg,
+        textAlign: 'center',
+        textAlignVertical: 'center'
     },
 
     titleShow: {
@@ -143,6 +185,22 @@ const styles = StyleSheet.create({
         color: '#F5FCFF',
         fontFamily: Fonts.Quicksand
     },
+
+    subtitleShow: {
+        fontSize: 17,
+        paddingLeft: 10,
+        marginBottom: 10,
+        color: '#F5FCFF',
+        fontFamily: Fonts.Quicksand
+    },
+
+    textForThumbnail: {
+        color: '#f1faee',
+        fontSize: 19,
+        fontFamily: Fonts.QuicksandReg,
+        textAlign: 'center',
+        textAlignVertical:"center"
+    }
 
 })
 
