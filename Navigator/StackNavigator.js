@@ -5,6 +5,7 @@ import VideoPlayerView from '../src/components/VideoPlayerView'
 import ComicList from '../src/components/comicList'
 import Login from '../Login/Login.js'
 import Register from '../Login/Register'
+import ComicViewer from '../src/components/comicViewer'
 
 import TabNavigator from './TabNavigator'
 import DrawerNavigator from './DrawerNavigator'
@@ -21,6 +22,9 @@ const AppNavigator = createStackNavigator({
     navigationOptions:{
     header: null
     }},
+  comicViewer: {
+    screen: ComicViewer
+  },
   Login: {
      screen: Login,
      navigationOptions:{

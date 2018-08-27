@@ -16,6 +16,10 @@ export default class ChapterList extends Component{
     componentDidMount(){
         this.getChapter()
     }
+
+    componentDidMount(){
+        this.getChapter()
+    }
     
 
    getChapter = () => {
@@ -48,9 +52,14 @@ export default class ChapterList extends Component{
     }
 
     _newPushContent = item =>{
-
-        
-
+        this.props.closeModal(false);
+        this.props.navigation.navigate(
+            'comicViewer',
+            { passProps: {
+                 item
+                 }
+             }
+         )
     }
 
 render(){

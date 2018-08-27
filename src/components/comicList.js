@@ -54,10 +54,7 @@ class ComicList extends Component{
         }
       }
     
-    
-    getChapter = currentID => {
 
-    }
 
     //to enlist the collection of API objects
     _showList = data => {
@@ -72,7 +69,6 @@ class ComicList extends Component{
     }
 
     render(){
-        console.log(this.props)
         return(
         <View>
                 <Text style={styles.listTitle}>My Comics</Text>
@@ -124,7 +120,11 @@ class ComicList extends Component{
                             {/* CONTAINER FOR CHAPTER LIST */}
                             <View style={{flex: 4}}>
                            
-                                    <ChapterList currentComicData = {this.state.currentComicData} />
+                                    <ChapterList 
+                                    closeModal={value => this.setModalVisible(value)}
+                                    currentComicData = {this.state.currentComicData} 
+                                    //modalState = {this.state.setModalVisible} 
+                                    navigation={this.props.navigation}/>
                            
                             </View>
 
