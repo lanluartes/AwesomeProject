@@ -18,6 +18,12 @@ const AppNavigator = createStackNavigator({
   //   navigationOptions:{
   //   header: null
   //   }},
+  Login: {
+     screen: Login,
+     navigationOptions:{
+    header: null
+       }
+    },
   Tab: {screen: TabNavigator,
     navigationOptions:{
     header: null
@@ -25,12 +31,6 @@ const AppNavigator = createStackNavigator({
   comicViewer: {
     screen: ComicViewer
   },
-  Login: {
-     screen: Login,
-     navigationOptions:{
-    header: null
-       }
-    },
   Register: {
     screen: Register,
     navigationOptions:{
