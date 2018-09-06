@@ -27,7 +27,7 @@ export default class LoginForm extends Component {
     }}
   }
 
-  _logIn= data => {
+  _logIn = data => {
     const axios = require('axios');
     const myData = new FormData();
     myData.append("username",data.username);
@@ -43,7 +43,7 @@ export default class LoginForm extends Component {
 
   _verifyLogIn = data =>{
 
-
+    console.log(data.userID);
      if(data.connection === "connected"){
        this.props.navigation.navigate('Tab');
            

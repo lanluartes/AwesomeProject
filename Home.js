@@ -13,6 +13,7 @@ export default class Home extends React.Component{
 
 
 
+
     constructor(props){
         super(props);
     
@@ -81,6 +82,12 @@ export default class Home extends React.Component{
         return(
             <View style={styles.holderBox}>
 
+                <View style={styles.header}>
+                        <Text style={styles.headerText}>
+                            Wash App Kids
+                        </Text>
+                </View>
+
                 {/*this panel may be used to hold the -banner- an image or an array of image showing what's new in the app.*/}
                 <View style={styles.imageBox}>
                     {/*learn how to install react-native-slider -- tutorial: www.youtube.com/results?search_query=how+to+install+react-native+swiper --*/}
@@ -134,6 +141,20 @@ export default class Home extends React.Component{
  
   const styles = StyleSheet.create({
         
+        header:{
+            flex: 0.4,
+            backgroundColor: '#FFE066',
+            justifyContent: 'center',
+            alignContent: 'center'
+        },
+
+        headerText: {
+            fontSize: 20,
+             textAlign: 'center', 
+             fontFamily: Fonts.Quicksand,
+             color: '#00A6ED'
+        },
+            
         slide: {
             flex: 1,
             justifyContent: 'center',
@@ -152,6 +173,7 @@ export default class Home extends React.Component{
              fontFamily: Fonts.Quicksand,
              color: 'black'
         },
+
         holderBox:{
                 flex: 1,
                 flexDirection: 'column'
@@ -172,12 +194,6 @@ export default class Home extends React.Component{
             marginLeft: 8,
             marginTop: 10
             },
-
-        resizeDare:{
-                width: 67,
-                height: 45,
-                marginLeft: 8
-            },
             
         imageBox:{
                 flex:2, 
@@ -185,10 +201,12 @@ export default class Home extends React.Component{
             },
             
         mainBox:{
+
                 flex:3, 
                 backgroundColor: '#F5FCFF',
                 flexDirection: 'column',
                 flexWrap: 'wrap'
+
             },
         
         insideBox:{

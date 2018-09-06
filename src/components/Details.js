@@ -79,6 +79,7 @@ class Details extends Component {
 
                     <View style={styles.shareListIcon}>
                             <View style={styles.myListIcon}>
+                                
                                     <Icon 
                                     style={styles.listIcon}
                                     name='heart-o'
@@ -86,6 +87,7 @@ class Details extends Component {
                                     size={25}
                                     />
                                     <Text style={styles.text}>My List</Text>
+                                    
                             </View>
 
                             <View style={styles.myShareIcon}>

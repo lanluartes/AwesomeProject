@@ -2,38 +2,47 @@ import React, { Component } from 'React';
 import {View, Text, Image , StyleSheet, KeyboardAvoidingView} from 'react-native';
 import { Fonts } from '../src/utils/Fonts'
 import LoginForm from './LoginForm'
+import LinearGradient from 'react-native-linear-gradient'
 
 export default class Login extends Component{
   render(){
             return(
+            <LinearGradient colors={['#000046', '#1CB5E0']} style={styles.linearGradient}>
                 <KeyboardAvoidingView behavior="padding" style={styles.container}>
-                    <View style={styles.logoContainer}>
+                        <View style={styles.logoContainer}>
 
-                        <Image
-                        style={styles.logo}
-                        source={require('../assets/Logo/wash-logo.png')}
-                        />
-                        <Text style={styles.title}>
-                            Wash app kids!
-                        </Text>
+                            <Image
+                            style={styles.logo}
+                            source={require('../assets/Logo/wash-logo.png')}
+                            />
+                            <Text style={styles.title}>
+                                Wash app kids!
+                            </Text>
 
 
-                    </View>
-
-                        <View style={styles.formContainer}>
-                                <LoginForm navigation={this.props.navigation}/>
                         </View>
+
+                            <View style={styles.formContainer}>
+                                    <LoginForm navigation={this.props.navigation}/>
+                            </View>
                 </KeyboardAvoidingView>
+            </LinearGradient>
           );
   }
 }
 
 const styles = StyleSheet.create({
+    linearGradient: {
+        flex: 1,
+        paddingLeft: 15,
+        paddingRight: 15,
+        borderRadius: 5,
+      },
 
     container: {
         flex: 1,
-        backgroundColor:  '#0B3954'
     },
+
     logoContainer: {
         alignItems: 'center',
         flexGrow: 1,

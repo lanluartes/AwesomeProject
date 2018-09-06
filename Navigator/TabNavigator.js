@@ -7,15 +7,17 @@ import { Fonts } from '../src/utils/Fonts';
 
 import {createBottomTabNavigator} from 'react-navigation';
 
-
-
-
 const TabNavigator = createBottomTabNavigator({
   Comics: { screen: linis },
-  Home: {screen: Home},
+  Home: {screen: Home,
+  navigationOptions: () => ({
+    initialRouteName: Home
+  })
+  },
   Videos: {screen: Kwentuhan}, 
 },
 {
+  initialRouteName: "Home",
   navigationOptions: ({ navigation }) => ({
     tabBarIcon: ({ focused, tintColor }) => {
       const { routeName } = navigation.state;
@@ -40,6 +42,9 @@ const TabNavigator = createBottomTabNavigator({
     }
   },
 }
+
+  
+
 );
 
 
