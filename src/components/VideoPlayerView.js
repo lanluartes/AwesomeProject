@@ -10,8 +10,23 @@ class VideoPlayerView extends Component{
     header: null
   };
 
-    componentWillMount(){
+    _addViewCount = data => {
+        const axios = require('axios');
+        const myData = new FormData();
+        myData.append("videoID", data);
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/public/addView',
+            data: myData
+          })
+
+    }
+
+    componentDidMount(){
         Orientation.lockToLandscape()
+        const {navigation} = this.props
+        this._addViewCount(navigation.state.params.passProps.item.IdNo);
     }
 
     componentWillUnmount(){
@@ -25,6 +40,7 @@ class VideoPlayerView extends Component{
 
     render(){
         const {navigation} = this.props
+        console.log(navigation.state.params.passProps.item)
         return(
             <View style={styles.container}>
                 <VideoPlayer
