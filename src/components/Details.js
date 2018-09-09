@@ -17,6 +17,10 @@ import Orientation from 'react-native-orientation'
 const {width, height} =  Dimensions.get('window')
 
 class Details extends Component {
+
+    likeVideo = () => {
+        console.log("hello")
+    }
     
     componentWillMount(){
         Orientation.lockToPortrait()
@@ -78,17 +82,19 @@ class Details extends Component {
                     <Text style={styles.text}>Creator: {navigation.state.params.passProps.item.VideoAuthor}</Text>
 
                     <View style={styles.shareListIcon}>
-                            <View style={styles.myListIcon}>
-                                
-                                    <Icon 
-                                    style={styles.listIcon}
-                                    name='heart-o'
-                                    color='#2c3e50'
-                                    size={25}
-                                    />
-                                    <Text style={styles.text}>My List</Text>
-                                    
-                            </View>
+                            <TouchableWithoutFeedback
+                                onPress={() => this.likeVideo()}
+                            >
+                                <View style={styles.myListIcon}>
+                                        <Icon 
+                                        style={styles.listIcon}
+                                        name='heart-o'
+                                        color='#2c3e50'
+                                        size={25}
+                                        />
+                                        <Text style={styles.text}>My List</Text>                           
+                                </View>
+                            </TouchableWithoutFeedback>   
 
                             <View style={styles.myShareIcon}>
                                 <Icon 
