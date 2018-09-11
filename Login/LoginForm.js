@@ -43,9 +43,8 @@ export default class LoginForm extends Component {
 
   _verifyLogIn = data =>{
 
-    console.log(data.userID);
      if(data.connection === "connected"){
-       this.props.navigation.navigate('Tab');
+       this.props.navigation.navigate('Tab', {passProps: data});
            
     }else if(data.connection === "failed"){
        this.setModalVisible(true)

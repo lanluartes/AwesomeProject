@@ -37,7 +37,7 @@ class Kwentuhan extends React.Component {
 
 render() {
       return (
-            <List navigation={this.props.navigation}/>
+            <List navigation={this.props.navigation} user={this.props.navigation.state.params.passProps}/>
       )
     }
   }

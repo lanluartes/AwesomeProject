@@ -18,12 +18,56 @@ const {width, height} =  Dimensions.get('window')
 
 class Details extends Component {
 
-    likeVideo = () => {
-        console.log("hello")
+    constructor(props) {
+        super(props);
+        this.state = {relation: 'unliked'}
+      }
+
+    determineIfLiked = (videoID, userID) => {
+
+        const axios = require('axios');
+        const myData = new FormData();
+
+        myData.append("userID", userID)
+        myData.append("videoID", videoID)
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/public/checkVideoUser',
+            data: myData
+          })
+          .then(res => this.updateRelation(JSON.parse(res.data)))
+
+    }
+
+    updateRelation = data => {
+        this.setState({relation: data.relation})
+    }
+
+    updateLike = (videoID, userID) => {
+
+        const axios = require('axios');
+        const myData = new FormData();
+        myData.append("videoID", videoID);
+        myData.append("userID", userID);
+
+        if(this.state.relation === 'liked'){
+            myData.append("actionID", 0);
+        }else if(this.state.relation === 'unliked'){
+            myData.append("actionID", 1);
+        }
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/public/likeVideo',
+            data: myData
+          }).then(() => this.determineIfLiked(videoID, userID))
     }
     
-    componentWillMount(){
+    componentDidMount(){
         Orientation.lockToPortrait()
+
+        this.determineIfLiked(this.props.navigation.state.params.passProps.item.IdNo, this.props.navigation.state.params.passProps.user.userID);
     }
 
     _gotoVideo(item) {
@@ -38,6 +82,7 @@ class Details extends Component {
 
     render(){
         const {navigation} = this.props
+        
        return(
             <ScrollView style={styles.container}>
                 <ImageBackground 
@@ -83,13 +128,13 @@ class Details extends Component {
 
                     <View style={styles.shareListIcon}>
                             <TouchableWithoutFeedback
-                                onPress={() => this.likeVideo()}
+                                onPress={() => this.updateLike(navigation.state.params.passProps.item.IdNo, navigation.state.params.passProps.user.userID)}
                             >
                                 <View style={styles.myListIcon}>
                                         <Icon 
                                         style={styles.listIcon}
-                                        name='heart-o'
-                                        color='#2c3e50'
+                                        name={'heart' + (this.state.relation === 'liked' ? '' : '-o')}
+                                        color={(this.state.relation === 'liked' ? '#F25F5C' : '#2c3e50')}
                                         size={25}
                                         />
                                         <Text style={styles.text}>My List</Text>                           

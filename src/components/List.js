@@ -411,19 +411,20 @@ class List extends Component {
       }
 
 
-    _newPushContent = item => {
+    _newPushContent = (item,user) => {
         this.props.navigation.navigate(
            'Details',
            { passProps: {
-                item
+                item,
+                user
                 }
             }
         )
     }
 
-    _showList = data => {
+    _showList = (data,user) => {
         return(
-            <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
+            <TouchableWithoutFeedback onPress={() => this._newPushContent(data, user)}>
                 <Image style={{width: 120, height: 180}} source={{uri: 'http://10.0.2.2/wash-admin/'+data.thumbnailPath}}/>
             </TouchableWithoutFeedback>
         )
@@ -438,6 +439,9 @@ class List extends Component {
     }
 
     render(){
+
+        const {user} = this.props
+
         return(
             <View style={{flex: 1}}>
                 <View>
@@ -457,7 +461,7 @@ class List extends Component {
                         keyExtractor={(item, index) => index.toString()}
                         horizontal
                         ItemSeparatorComponent ={() => <View style={{width: 5}} />}
-                        renderItem={({item}) => this._showList(item)} 
+                        renderItem={({item}) => this._showList(item, user)} 
                         data={this.state.data}
                     />
                 </View>

@@ -16,17 +16,17 @@ import DrawerScreen from './DrawerScreen'
 import {createStackNavigator, createDrawerNavigator} from 'react-navigation';
 
 const AppNavigator = createStackNavigator({
+  Login: {
+      screen: Login,
+      navigationOptions:{
+     header: null
+        }
+     },
   Tab: {
     screen: TabNavigator,
     navigationOptions:{
     header: null
     }},
- Login: {
-     screen: Login,
-     navigationOptions:{
-    header: null
-       }
-    },
   comicViewer: {
     screen: ComicViewer
   },
