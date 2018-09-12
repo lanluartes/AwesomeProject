@@ -5,6 +5,7 @@ import Orientation from 'react-native-orientation'
 import * as Animatable from 'react-native-animatable'
 import Modal from 'react-native-modal'
 import Ionicon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import ChapterList from './ChapterList'
 
 const {width, height} =  Dimensions.get('screen')
@@ -62,13 +63,18 @@ class ComicList extends Component{
             <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
                  <View style={{backgroundColor: '#1d3557', paddingBottom: 3}}>
                     <Image style={styles.imageResize} source={{uri: 'http://10.0.2.2/wash-admin/'+data.ComicThumbnailPath}}/>
-                    <Text numberOfLines={1} style={styles.textForThumbnail} allowFontScaling adjustsFontSizeToFit minimumFontScale={.5}> {data.ComicTitle} </Text>
+                    <Text numberOfLines={1} style={styles.textForThumbnail} 
+                    allowFontScaling adjustsFontSizeToFit 
+                    minimumFontScale={.5}> {data.ComicTitle} </Text>
                 </View>
             </TouchableWithoutFeedback>
         )
     }
 
     render(){
+
+        // console.log(this.props.navigation.state.params.passProps.userID)
+
         return(
         <View>
                 <Text style={styles.listTitle}>My Comics</Text>
@@ -98,6 +104,7 @@ class ComicList extends Component{
                             {/* Modal header */}
                             <View style={{flex: 2, flexDirection: 'row'}}>
                                 <View style={{flex: 3}}>
+                             
                                     <Text numberOfLines={1} allowFontScaling adjustsFontSizeToFit minimumFontScale={.5} style={[styles.titleShow]}>
                                         {this.state.currentComicData.ComicTitle}
                                     </Text>
@@ -109,16 +116,24 @@ class ComicList extends Component{
                                        Description: {this.state.currentComicData.ComicDescription}
                                     </Text>
                                 </View>
-                                <View style={{flex: 1}}>
-                                    <Image
-                                        source={{uri: 'http://10.0.2.2/wash-admin/'+this.state.currentComicData.ComicThumbnailPath}}
-                                        style={{width: 75, height: 125, borderRadius: 2}}
-                                        />
+                                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginBottom: 100}}>
+                                        <TouchableWithoutFeedback
+                                        onPress={() => console.log('hello world')}
+                                    >
+                                        <View style={styles.myListIcon}>
+                                                <Icon 
+                                                style={styles.listIcon}
+                                                name={'heart-o'}
+                                                color={'white'}
+                                                size={25}
+                                                />                         
+                                        </View>
+                                    </TouchableWithoutFeedback>  
                                 </View>    
                              </View>
 
                             {/* CONTAINER FOR CHAPTER LIST */}
-                            <View style={{flex: 4}}>
+                            <View style={{flex: 4, borderColor: 'white', borderBottomWidth: 1, borderTopWidth: 1}}>
                            
                                     <ChapterList 
                                     closeModal={value => this.setModalVisible(value)}
