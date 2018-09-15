@@ -16,10 +16,51 @@ class ComicList extends Component{
     //storage for API data
     constructor() {
         super();
-        this.state = {comicData: [], currentComicData: []}
+        this.state = {comicData: [], currentComicData: [], relation: 'unliked'}
       }
 
-    
+    determineIfLiked = (seriesID, userID) => {
+        const axios = require('axios');
+        const myData = new FormData();
+
+        myData.append("userID", userID)
+        myData.append("seriesID", seriesID)
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/public/checkSeriesUser',
+            data: myData
+          })
+          .then(res => this.updateRelation(JSON.parse(res.data)))
+    }
+
+    updateRelation = data => {
+            this.setState({relation: data.relation})
+    }
+
+    updateLike = (seriesID, userID) => {
+
+        
+        const axios = require('axios');
+        const myData = new FormData();
+        myData.append("seriesID", seriesID);
+        myData.append("userID", userID);
+
+        if(this.state.relation === 'liked'){
+            myData.append("actionID", 0);
+        }else if(this.state.relation === 'unliked'){
+            myData.append("actionID", 1);
+        }
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/public/likeSeries',
+            data: myData
+          }).then(() => this.determineIfLiked(seriesID, userID))
+
+
+    }
+
     //to initialize data from API
     componentDidMount(){
         this.getData()
@@ -73,8 +114,6 @@ class ComicList extends Component{
 
     render(){
 
-        // console.log(this.props.navigation.state.params.passProps.userID)
-
         return(
         <View>
                 <Text style={styles.listTitle}>My Comics</Text>
@@ -96,6 +135,7 @@ class ComicList extends Component{
                     onRequestClose={() => {
                         this.setModalVisible(false);
                     }}
+                    onModalShow={() => {this.determineIfLiked(this.props.navigation.state.params.passProps.userID,this.state.currentComicData.SeriesID)}}
                     onBackdropPress={() => {this.setModalVisible(false)}}
                     style={styles.modalContainer}
                     >
@@ -118,13 +158,13 @@ class ComicList extends Component{
                                 </View>
                                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginBottom: 100}}>
                                         <TouchableWithoutFeedback
-                                        onPress={() => console.log('hello world')}
+                                        onPress={() => this.updateLike(this.state.currentComicData.SeriesID, this.props.navigation.state.params.passProps.userID)}
                                     >
                                         <View style={styles.myListIcon}>
                                                 <Icon 
                                                 style={styles.listIcon}
-                                                name={'heart-o'}
-                                                color={'white'}
+                                                name={'heart' + (this.state.relation === 'liked' ? '' : '-o')}
+                                                color={(this.state.relation === 'liked' ? '#F25F5C' : 'white')}
                                                 size={25}
                                                 />                         
                                         </View>
