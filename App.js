@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import AppNavigator from './Navigator/StackNavigator'
+import AppNavigator from './Navigator/RootNavigator'
 import Orientation from 'react-native-orientation'
 
 export default class App extends React.Component {

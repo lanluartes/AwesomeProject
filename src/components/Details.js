@@ -68,6 +68,7 @@ class Details extends Component {
         Orientation.lockToPortrait()
 
         this.determineIfLiked(this.props.navigation.state.params.passProps.item.IdNo, this.props.navigation.state.params.passProps.user.userID);
+
     }
 
     _gotoVideo(item) {

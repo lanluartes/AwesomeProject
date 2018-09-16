@@ -3,8 +3,6 @@ import Details from '../src/components/Details'
 import List from '../src/components/List'
 import VideoPlayerView from '../src/components/VideoPlayerView'
 import ComicList from '../src/components/comicList'
-import Login from '../Login/Login.js'
-import Register from '../Login/Register'
 import ComicViewer from '../src/components/comicViewer'
 import MyList from '../src/components/MyList'
 
@@ -15,13 +13,7 @@ import DrawerScreen from './DrawerScreen'
 
 import {createStackNavigator, createDrawerNavigator} from 'react-navigation';
 
-const AppNavigator = createStackNavigator({
-  Login: {
-      screen: Login,
-      navigationOptions:{
-     header: null
-        }
-     },
+const HomeNavigator = createStackNavigator({
   Tab: {
     screen: TabNavigator,
     navigationOptions:{
@@ -29,12 +21,6 @@ const AppNavigator = createStackNavigator({
     }},
   comicViewer: {
     screen: ComicViewer
-  },
-  Register: {
-    screen: Register,
-    navigationOptions:{
-      header: null
-    }  
   },
   List: {screen: List},
   Details: {screen: Details,
@@ -50,8 +36,8 @@ const AppNavigator = createStackNavigator({
 }
 );
 
-export default AppNavigator = createDrawerNavigator({
-    Home: {screen: AppNavigator},
+export default HomeNavigator = createDrawerNavigator({
+    Home: {screen: HomeNavigator},
     MyList: {screen: MyList}
 },
 {
