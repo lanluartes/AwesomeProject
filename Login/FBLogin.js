@@ -5,7 +5,7 @@ import { LoginButton } from 'react-native-fbsdk';
 export default class FBLoginButton extends Component {
   render() {
     return (
-      <View>
+      <View style={{flex: 1, alignContent: 'center', justifyContent: 'center'}}>
         <LoginButton
           publishPermissions={["email"]}
           onLoginFinished={

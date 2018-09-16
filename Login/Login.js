@@ -3,7 +3,7 @@ import {View, Text, Image , StyleSheet, KeyboardAvoidingView} from 'react-native
 import { Fonts } from '../src/utils/Fonts'
 import LoginForm from './LoginForm'
 import LinearGradient from 'react-native-linear-gradient'
-//import FBLoginButton from './FBLogin'
+import FBLoginButton from './FBLogin'
 
 export default class Login extends Component{
   render(){
@@ -22,13 +22,12 @@ export default class Login extends Component{
 
 
                         </View>
-
                             <View style={styles.formContainer}>
                                     <LoginForm navigation={this.props.navigation}/>
                             </View>
-                            {/* <View style={styles.formContainer}>
+                            <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
                                     <FBLoginButton />
-                            </View> */}
+                            </View>
                 </KeyboardAvoidingView>
             </LinearGradient>
           );
