@@ -116,11 +116,7 @@ class ComicList extends Component{
 
         return(
         
-        <View>
-
-        <View>
-            <Text> Comics </Text>
-        </View>
+        <View style={{flex: 1}}>
         <View>
                 <FlatList 
                       keyExtractor={(item, index) => index.toString()}

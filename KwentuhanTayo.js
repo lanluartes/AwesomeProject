@@ -37,14 +37,39 @@ class Kwentuhan extends React.Component {
 
 render() {
     console.log(this.props)
-      return (
+      return (         
+        <View style={styles.container}>
+
+          <View style={styles.header}>
+            <Text style={styles.headerText}>
+                Videos
+            </Text>
+          </View>
+
+          <View style={{flex: 5}}>
             <List navigation={this.props.navigation} user={this.props.navigation.state.params.passProps}/>
+          </View>
+
+        </View>
       )
     }
   }
 
   const styles = StyleSheet.create ({
-    
+
+    header:{
+      flex: 0.35,
+      backgroundColor: '#FFE066',
+      justifyContent: 'center',
+      alignContent: 'center'
+    },
+
+    headerText: {
+      fontSize: 20,
+       textAlign: 'center', 
+       fontFamily: Fonts.Quicksand,
+       color: '#00A6ED'
+    },
     container: {
       flex: 1,
       flexDirection: 'column'
