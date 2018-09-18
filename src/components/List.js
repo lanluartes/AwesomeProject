@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Text, View, StyleSheet, FlatList, Image, TouchableWithoutFeedback} from 'react-native'
+import {Text, View, StyleSheet, FlatList, Image, TouchableWithoutFeedback, ScrollView} from 'react-native'
 import { Fonts } from '../utils/Fonts';
 import Orientation from 'react-native-orientation'
 
@@ -425,7 +425,7 @@ class List extends Component {
     _showList = (data,user) => {
         return(
             <TouchableWithoutFeedback onPress={() => this._newPushContent(data, user)}>
-                <Image style={{width: 120, height: 180}} source={{uri: 'http://10.0.2.2/wash-admin/'+data.thumbnailPath}}/>
+                <Image style={{width: 120, height: 180, margin: 5}} source={{uri: 'http://10.0.2.2/wash-admin/'+data.thumbnailPath}}/>
             </TouchableWithoutFeedback>
         )
     }
@@ -433,7 +433,7 @@ class List extends Component {
     _renderItem(item){
         return(
             <TouchableWithoutFeedback onPress={() => this._newPushContent(item)}>
-                <Image style={{width: 120, height: 180}} source={{uri: item.image}}/>
+                <Image style={{width: 120, height: 180, margin: 5}} source={{uri: item.image}}/>
             </TouchableWithoutFeedback>
         )
     }
@@ -443,29 +443,24 @@ class List extends Component {
         const {user} = this.props
 
         return(
-            <View style={{flex: 1}}>
+            <ScrollView style={{flex: 1}}>
                 <View>
-                    <Text style={styles.listTitle}>My list</Text>
                     <FlatList 
                         keyExtractor={(item, index) => index.toString()}
-                        horizontal
+                        numColumns={3}
                         ItemSeparatorComponent ={() => <View style={{width: 5}} />}
                         renderItem={({item}) => this._renderItem(item)} 
                         data={shows_first}
                     />
-                </View>
-
-                <View>
-                    <Text style={styles.listTitle}>Second List</Text>
                     <FlatList 
                         keyExtractor={(item, index) => index.toString()}
-                        horizontal
+                        numColumns={3}
                         ItemSeparatorComponent ={() => <View style={{width: 5}} />}
                         renderItem={({item}) => this._showList(item, user)} 
                         data={this.state.data}
                     />
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }
