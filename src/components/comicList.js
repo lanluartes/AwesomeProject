@@ -102,7 +102,7 @@ class ComicList extends Component{
     _showList = data => {
         return(
             <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
-                 <View style={{backgroundColor: '#1d3557', paddingBottom: 3}}>
+                 <View style={{backgroundColor: '#1d3557', paddingBottom: 3, margin: 5, borderRadius: 5}}>
                     <Image style={styles.imageResize} source={{uri: 'http://10.0.2.2/wash-admin/'+data.ComicThumbnailPath}}/>
                     <Text numberOfLines={1} style={styles.textForThumbnail} 
                     allowFontScaling adjustsFontSizeToFit 
@@ -115,15 +115,16 @@ class ComicList extends Component{
     render(){
 
         return(
+        
+        <View style={{flex: 1}}>
         <View>
-                <Text style={styles.listTitle}>My Comics</Text>
                 <FlatList 
                       keyExtractor={(item, index) => index.toString()}
-                      horizontal
                       ItemSeparatorComponent ={() => <View style={{width: 5}} />}
                       renderItem={({item}) => this._showList(item)} 
                       data={this.state.comicData}
-                 />
+                      numColumns={3}
+                      />
 
 
                 {/* this is the modal */}
@@ -159,7 +160,7 @@ class ComicList extends Component{
                                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginBottom: 100}}>
                                         <TouchableWithoutFeedback
                                         onPress={() => this.updateLike(this.state.currentComicData.SeriesID, this.props.navigation.state.params.passProps.userID)}
-                                    >
+                                        >
                                         <View style={styles.myListIcon}>
                                                 <Icon 
                                                 style={styles.listIcon}
@@ -186,7 +187,7 @@ class ComicList extends Component{
                                <View style={{alignSelf: 'center'}}>
                                     <TouchableWithoutFeedback
                                         onPress={() => {
-                                        this.setModalVisible(!this.state.modalVisible);
+                                            this.setModalVisible(!this.state.modalVisible);
                                         }}>
                                         <View>
                                             <Ionicon name={'ios-arrow-down'} size={30} color={'#F5FCFF'}/>
@@ -197,8 +198,8 @@ class ComicList extends Component{
                         </Animatable.View>
                     </Modal>
                 </Animatable.View> 
-
         </View>
+    </View>
         )
     }
 
@@ -211,11 +212,11 @@ const styles = StyleSheet.create({
         borderRadius: 20, 
         backgroundColor: '#1d3557'
     },
-
+    
     imageResize: {
         width: 120, 
         height: 180, 
-        borderRadius: 2, 
+        borderRadius: 20, 
         backgroundColor: 'white'
     },
 

@@ -20,8 +20,7 @@ export default class DrawerScreen extends React.Component {
                     </Text>
                 </View>
 
-                <View style={{ flex: 2, padding: 2, flexDirection: 'column', flexWrap: 'wrap'}}>
-                   
+                <View style={{ flex: 2, padding: 2, flexDirection: 'column', flexWrap: 'wrap'}}>                 
                     <TouchableOpacity style={{height: 75, width: 275}}
                     onPress={() => {this.props.navigation.navigate('MyList')}}
                     >
