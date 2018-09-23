@@ -5,6 +5,8 @@ import HomeNavigator from './StackNavigator'
 import {createStackNavigator} from 'react-navigation';
 
 const AppNavigator = createStackNavigator({
+
+
   LogIn: {
       screen: LogInNavigator,
       navigationOptions:{

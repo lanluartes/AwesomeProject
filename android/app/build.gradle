@@ -141,6 +141,7 @@ ext {
 }
 
 dependencies {
+    //compile project(':react-native-unity-view')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-video')
     implementation project(':react-native-vector-icons')

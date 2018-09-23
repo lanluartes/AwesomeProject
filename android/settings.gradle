@@ -1,4 +1,6 @@
 rootProject.name = 'Wash'
+    // include ':react-native-unity-view'
+    // project(':react-native-unity-view').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-unity-view/android')
 
 include ':rn-fetch-blob'
 project(':rn-fetch-blob').projectDir = new File(rootProject.projectDir, '../node_modules/rn-fetch-blob/android')
@@ -16,5 +18,8 @@ include ':react-native-linear-gradient'
 project(':react-native-linear-gradient').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-linear-gradient/android')
 include ':react-native-fbsdk'
 project(':react-native-fbsdk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fbsdk/android')
+
+// include ":UnityExport"
+// project(":UnityExport").projectDir = file("./UnityExport")
 
 include ':app'
