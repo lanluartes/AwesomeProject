@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>AwesomeProject</string>
+	<string>Wash App Kids!</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -53,6 +53,7 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Quicksand-Bold.ttf</string>
 		<string>Quicksand-Medium.ttf</string>
 		<string>Quicksand-Regular.ttf</string>
 		<string>Entypo.ttf</string>
@@ -66,7 +67,6 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
-		<string>Quicksand-Bold.ttf</string>
 	</array>
 </dict>
 </plist>

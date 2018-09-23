@@ -1,16 +1,16 @@
-package com.awesomeproject;
+package com.wash;
 
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
-import org.wonday.pdf.RCTPdfView;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.brentvatne.react.ReactVideoPackage;
-import com.github.yamill.orientation.OrientationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
 import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import org.wonday.pdf.RCTPdfView;
+import com.github.yamill.orientation.OrientationPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -40,14 +40,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RCTPdfView(),
             new RNFetchBlobPackage(),
             new ReactVideoPackage(),
-            new OrientationPackage(),
             new VectorIconsPackage(),
+            new ReactNativePushNotificationPackage(),
+            new RCTPdfView(),
+            new OrientationPackage(),
             new LinearGradientPackage(),
-          new ReactNativePushNotificationPackage(),
-          new FBSDKPackage(mCallbackManager)
+            new FBSDKPackage(mCallbackManager)
       );
     }
 
