@@ -50,7 +50,7 @@ export default class MyList extends React.Component {
 
                 <View style={{flex: 5}}>
                     <MyView hide={this.state.isTrue} style={{flex: 1}}>
-                            <MyComicList />
+                            <MyComicList navigation={this.props.navigation} user={this.props.navigation.state.params.passProps}/>
                     </MyView>
                     <MyView hide={!this.state.isTrue} style={{flex: 1}}>
                             <MyVideoList navigation={this.props.navigation} user={this.props.navigation.state.params.passProps}/>
