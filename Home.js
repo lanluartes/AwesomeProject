@@ -90,32 +90,32 @@ export default class Home extends React.Component{
                     {/*learn how to install react-native-slider -- tutorial: www.youtube.com/results?search_query=how+to+install+react-native+swiper --*/}
                     <Swiper style={styles.wrapper} autoplay={true}>
                         <View style={styles.slide}>
-                             <Image style={{flex: 1, resizeMode: 'cover'}} 
+                             <Image style={{flex: 1, resizeMode: 'contain'}} 
                                     source={require('./assets/Images/langgam.jpg')}/>
                         </View>
 
                         <View style={styles.slide}>
-                            <Image style={{flex: 1, resizeMode: 'cover'}} 
+                            <Image style={{flex: 1, resizeMode: 'contain'}} 
                                    source={require('./assets/Images/maymay.jpg')}/>
                         </View>
 
                         <View style={styles.slide}>
-                            <Image style={{flex: 1, resizeMode: 'cover'}} 
+                            <Image style={{flex: 1, resizeMode: 'contain'}} 
                                    source={require('./assets/Images/papel.jpg')}/>
                         </View>
 
                         <View style={styles.slide}>
-                            <Image style={{flex: 1, resizeMode: 'cover'}} 
+                            <Image style={{flex: 1, resizeMode: 'contain'}} 
                                    source={require('./assets/Images/payong.jpg')}/>
                         </View>
 
                         <View style={styles.slide}>
-                            <Image style={{flex: 1, resizeMode: 'cover'}} 
+                            <Image style={{flex: 1, resizeMode: 'contain'}} 
                                    source={require('./assets/Images/robot.jpg')}/>
                         </View>
 
                         <View style={styles.slide}>
-                            <Image style={{flex: 1, resizeMode: 'cover'}} 
+                            <Image style={{flex: 1, resizeMode: 'contain'}} 
                                    source={require('./assets/Images/santa.jpg')}/>
                         </View>
                     </Swiper>
@@ -209,8 +209,7 @@ export default class Home extends React.Component{
             },
             
         imageBox:{
-                flex:2, 
-                backgroundColor: '#F5FCFF'
+                flex:2
             },
             
         mainBox:{
