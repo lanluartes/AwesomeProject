@@ -1,5 +1,5 @@
 import React, { Component } from 'React';
-import {Alert, View, Text, StyleSheet, Image, TouchableOpacity, Button, AppState} from 'react-native';
+import {Alert, View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground, AppState} from 'react-native';
 import { Fonts } from './src/utils/Fonts';
 import {createBottomTabNavigator} from 'react-navigation';
 import Swiper from 'react-native-swiper';
@@ -10,9 +10,6 @@ import  PushController from './PushController';
 import Kwentuhan from './KwentuhanTayo';
 
 export default class Home extends React.Component{
-
-
-
 
     constructor(props){
         super(props);
@@ -91,42 +88,58 @@ export default class Home extends React.Component{
                 {/*this panel may be used to hold the -banner- an image or an array of image showing what's new in the app.*/}
                 <View style={styles.imageBox}>
                     {/*learn how to install react-native-slider -- tutorial: www.youtube.com/results?search_query=how+to+install+react-native+swiper --*/}
-                    <Swiper style={styles.wrapper}>
+                    <Swiper style={styles.wrapper} autoplay={true}>
                         <View style={styles.slide}>
-                             <Image style={{flex: 1, resizeMode: 'contain'}} 
-                                    source={require('./assets/Images/1.jpg')}/>
+                             <Image style={{flex: 1, resizeMode: 'cover'}} 
+                                    source={require('./assets/Images/langgam.jpg')}/>
                         </View>
 
                         <View style={styles.slide}>
-                            <Image style={{flex: 1, resizeMode: 'contain'}} 
-                                   source={require('./assets/Images/2.jpg')}/>
+                            <Image style={{flex: 1, resizeMode: 'cover'}} 
+                                   source={require('./assets/Images/maymay.jpg')}/>
                         </View>
 
                         <View style={styles.slide}>
-                            <Image style={{flex: 1, resizeMode: 'contain'}} 
-                                   source={require('./assets/Images/3.jpg')}/>
+                            <Image style={{flex: 1, resizeMode: 'cover'}} 
+                                   source={require('./assets/Images/papel.jpg')}/>
+                        </View>
+
+                        <View style={styles.slide}>
+                            <Image style={{flex: 1, resizeMode: 'cover'}} 
+                                   source={require('./assets/Images/payong.jpg')}/>
+                        </View>
+
+                        <View style={styles.slide}>
+                            <Image style={{flex: 1, resizeMode: 'cover'}} 
+                                   source={require('./assets/Images/robot.jpg')}/>
+                        </View>
+
+                        <View style={styles.slide}>
+                            <Image style={{flex: 1, resizeMode: 'cover'}} 
+                                   source={require('./assets/Images/santa.jpg')}/>
                         </View>
                     </Swiper>
                 </View>
 
                 {/*this panel is used for holding the buttons that lead to other processes -stream video, read comics, play games-*/}
                 <View style={styles.mainBox}>
-                    <View style={styles.insideBox}>
-           
+                    <ImageBackground
+                    source={require('./assets/Images/mad.jpg')}
+                    style={{flex: 1, margin: 10}}
+                    >
 
-                    </View>
+                        {/* <View style={styles.insideBox}>
+                            <TouchableOpacity 
+                            style={styles.button}
+                            onPress={this.onPress}>
+                            <Image 
+                            style={styles.buttonIcon}
+                            source={require('./assets/Icons/sledge.png')}/>
+                            <Text  style={styles.buttonText}>Tayo na't Maglaro</Text>
+                            </TouchableOpacity> 
+                        </View>  */}
 
-                    <View style={styles.insideBox}>
-              
-                        <TouchableOpacity 
-                        style={styles.button}
-                        onPress={this.onPress}>
-                        <Image 
-                        style={styles.buttonIcon}
-                        source={require('./assets/Icons/sledge.png')}/>
-                        <Text  style={styles.buttonText}>Tayo na't Maglaro</Text>
-                        </TouchableOpacity> 
-                    </View> 
+                    </ImageBackground>
                 </View>
 
                <PushController />

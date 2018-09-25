@@ -26,9 +26,9 @@ export default class Login extends Component{
                             <View style={styles.formContainer}>
                                     <LoginForm navigation={this.props.navigation}/>
                             </View>
-                            <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
+                            {/* <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
                                     <FBLoginButton />
-                            </View>
+                            </View> */}
                 </KeyboardAvoidingView>
             </LinearGradient>
           );

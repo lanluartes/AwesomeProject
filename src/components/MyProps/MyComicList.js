@@ -16,7 +16,6 @@ class ComicList extends Component{
     constructor() {
         super();
         this.state = {comicData: [], currentComicData: []}
-        
       }
 
     //to initialize data from API
@@ -42,7 +41,6 @@ class ComicList extends Component{
 
     //to get api data 
     getLikedComics = () => {
-
 
         const axios = require('axios');
         const myData = new FormData();

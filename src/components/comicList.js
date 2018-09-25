@@ -136,7 +136,7 @@ class ComicList extends Component{
                     onRequestClose={() => {
                         this.setModalVisible(false);
                     }}
-                    onModalShow={() => {this.determineIfLiked(this.props.navigation.state.params.passProps.userID,this.state.currentComicData.SeriesID)}}
+                    onModalShow={() => {this.determineIfLiked(this.state.currentComicData.SeriesID, this.props.navigation.state.params.passProps.userID)}}
                     onBackdropPress={() => {this.setModalVisible(false)}}
                     style={styles.modalContainer}
                     >
