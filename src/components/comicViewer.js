@@ -6,10 +6,10 @@ import Pdf from 'react-native-pdf';
 export default class ComicViewer extends React.Component {
     render() {
         console.log(this.props)
-        // const {chapterPath} = this.props.state.params.passProps.item 
+         const {chapterPath} = this.props.navigation.state.params.passProps.item 
         //use above line for the opening of the specific chapter. append in front -> http://10.0.2.2/wash-admin/
 
-        const source = {uri:'http://samples.leanpub.com/thereactnativebook-sample.pdf',cache:true};
+        const source = {uri:'http://10.0.2.2/wash-admin/'+chapterPath,cache:true};
 
         return (
             <View style={styles.container}>

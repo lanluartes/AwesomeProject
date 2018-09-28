@@ -104,9 +104,10 @@ class ComicList extends Component{
             <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
                  <View style={{backgroundColor: '#1d3557', paddingBottom: 3, margin: 5, borderRadius: 5}}>
                     <Image style={styles.imageResize} source={{uri: 'http://10.0.2.2/wash-admin/'+data.ComicThumbnailPath}}/>
-                    <Text numberOfLines={1} style={styles.textForThumbnail} 
-                    allowFontScaling adjustsFontSizeToFit 
-                    minimumFontScale={.5}> {data.ComicTitle} </Text>
+                    
+                    <View style={{flexDirection: 'row'}}>
+                        <Text numberOfLines={1} style={styles.textForThumbnail} allowFontScaling adjustsFontSizeToFit minimumFontScale={.5}> {data.ComicTitle} </Text>
+                    </View>
                 </View>
             </TouchableWithoutFeedback>
         )
@@ -215,8 +216,7 @@ const styles = StyleSheet.create({
     
     imageResize: {
         width: 120, 
-        height: 180, 
-        borderRadius: 20, 
+        height: 180,
         backgroundColor: 'white'
     },
 
@@ -251,11 +251,20 @@ const styles = StyleSheet.create({
     },
 
     textForThumbnail: {
+        // color: '#f1faee',
+        // fontSize: 16,
+        // fontFamily: Fonts.QuicksandReg,
+        // textAlign: 'center',
+        // textAlignVertical:"center",
+        // flex: 1,
+        // flexWrap: 'wrap'
         color: '#f1faee',
-        fontSize: 19,
+        fontSize: 15,
         fontFamily: Fonts.QuicksandReg,
         textAlign: 'center',
-        textAlignVertical:"center"
+        textAlignVertical:"center",
+        flex: 1,
+        flexWrap: 'wrap'
     }
 
 })

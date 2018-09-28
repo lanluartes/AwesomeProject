@@ -445,13 +445,13 @@ class List extends Component {
         return(
             <ScrollView style={{flex: 1}}>
                 <View>
-                    <FlatList 
+                    {/* <FlatList 
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={3}
                         ItemSeparatorComponent ={() => <View style={{width: 5}} />}
                         renderItem={({item}) => this._renderItem(item)} 
                         data={shows_first}
-                    />
+                    /> */}
                     <FlatList 
                         keyExtractor={(item, index) => index.toString()}
                         numColumns={3}

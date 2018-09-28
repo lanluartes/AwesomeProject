@@ -64,9 +64,7 @@ class ComicList extends Component{
             <TouchableWithoutFeedback onPress={() => this._newPushContent(data)}>
                  <View style={{backgroundColor: '#1d3557', paddingBottom: 3, margin: 5, borderRadius: 5}}>
                     <Image style={styles.imageResize} source={{uri: 'http://10.0.2.2/wash-admin/'+data.ComicThumbnailPath}}/>
-                    <Text numberOfLines={1} style={styles.textForThumbnail} 
-                    allowFontScaling adjustsFontSizeToFit 
-                    minimumFontScale={.5}> {data.ComicTitle} </Text>
+                    <Text numberOfLines={1} style={styles.textForThumbnail} allowFontScaling adjustsFontSizeToFit minimumFontScale={.5}> {data.ComicTitle} </Text>
                 </View>
             </TouchableWithoutFeedback>
         )
@@ -199,11 +197,19 @@ const styles = StyleSheet.create({
     },
 
     textForThumbnail: {
+        // color: '#f1faee',
+        // fontSize: 19,
+        // fontFamily: Fonts.QuicksandReg,
+        // textAlign: 'center',
+        // textAlignVertical:"center"
+
         color: '#f1faee',
-        fontSize: 19,
+        fontSize: 15,
         fontFamily: Fonts.QuicksandReg,
         textAlign: 'center',
-        textAlignVertical:"center"
+        textAlignVertical:"center",
+        flex: 1,
+        flexWrap: 'wrap'
     }
 
 })
