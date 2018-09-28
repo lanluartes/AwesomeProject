@@ -1,15 +1,37 @@
 import React, { Component } from 'React';
-import {Alert, View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground, AppState} from 'react-native';
+import {Alert, View, Text, StyleSheet, Image, Dimensions, ImageBackground, AppState} from 'react-native';
 import { Fonts } from './src/utils/Fonts';
-import {createBottomTabNavigator} from 'react-navigation';
 import Swiper from 'react-native-swiper';
-import PushNotification from 'react-native-push-notification';
+import PushNotification, { requestPermissions } from 'react-native-push-notification';
 import  PushController from './PushController';
 
+const sliderWidth = Dimensions.get('window').width;
+const itemHeight = Dimensions.get('window').height;
 
-import Kwentuhan from './KwentuhanTayo';
+import Carousel from 'react-native-snap-carousel'
+
+
 
 export default class Home extends React.Component{
+
+    // _renderItem = (item) => {
+
+    //     console.log(item.image)
+
+    //     return (
+    //         <View style={styles.slide}>
+
+    //             <Image 
+    //             source={require('./assets/Images/imagers/'+item.image)}
+    //             resizeMode={'contain'}
+    //             />
+
+    //              <Text style={styles.title}>{ item.name }</Text>
+
+
+    //         </View>
+    //     );
+    // }
 
     constructor(props){
         super(props);
@@ -119,6 +141,18 @@ export default class Home extends React.Component{
                                    source={require('./assets/Images/santa.jpg')}/>
                         </View>
                     </Swiper>
+
+                    {/* <Carousel 
+                    data={header}
+                    autoplay={true}
+                    renderItem={({item}) => this._renderItem(item)}
+                    layout={'tinder'} 
+                    layoutCardOffset={9}
+                    windowSize={1}
+                    sliderWidth={sliderWidth}
+                    itemWidth={sliderWidth}
+                    itemHeight={itemHeight}
+                    /> */}
                 </View>
 
                 {/*this panel is used for holding the buttons that lead to other processes -stream video, read comics, play games-*/}
@@ -172,7 +206,9 @@ export default class Home extends React.Component{
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#9DD6EB'
+            backgroundColor: '#9DD6EB',
+            borderRadius: 10,
+            margin: 10
         },
         text: {
             color: '#fff',
@@ -209,7 +245,8 @@ export default class Home extends React.Component{
             },
             
         imageBox:{
-                flex:2
+                flex:2, 
+                backgroundColor: '#F5FCFF'
             },
             
         mainBox:{
