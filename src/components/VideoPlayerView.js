@@ -40,7 +40,6 @@ class VideoPlayerView extends Component{
 
     render(){
         const {navigation} = this.props
-        console.log(navigation.state.params.passProps.item)
         return(
             <View style={styles.container}>
                 <VideoPlayer

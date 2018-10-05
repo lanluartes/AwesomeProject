@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {View, 
         Text, 
         StyleSheet, 
-        ImageBackground, 
-        TouchableHighLight, 
+        ImageBackground,
         TouchableWithoutFeedback, 
         ScrollView,
-        Dimensions
+        Dimensions,
+        PermissionsAndroid
     } from 'react-native';
-
+import RNFetchBlob from 'rn-fetch-blob'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import TextGradient from 'react-native-linear-gradient'
 import { Fonts } from '../utils/Fonts';
@@ -22,6 +22,46 @@ class Details extends Component {
         super(props);
         this.state = {relation: 'unliked'}
       }
+
+    //add the blue indication on the download button if the download is on going or change the icon if the video is downloaded
+    checkIfDownloaded = (item) => {
+
+        // only change the indication if downloaded.
+        // item.VideoFileName will be the one to be searched.
+        //item.VideoFileName = this.props.navigation.params...
+
+        
+        
+
+    }
+ 
+    downloadVideo = (item) => {
+
+        //add a function to make a blue circle while downloading. 
+        //also add a function that makes 
+
+        let dirs = RNFetchBlob.fs.dirs
+
+            RNFetchBlob
+            .config({fileCache: true,
+                    addAndroidDownloads : {
+                        useDownloadManager : true,
+                        title:'tangina',
+                        notification : true,
+                        mime : 'video/mp4',
+                        description : 'File downloaded by download manager.',
+                        path: dirs.SDCardApplicationDir  + `/files/${item.VideoFileName}.wash`,
+                        mediaScannable: true
+                    }
+            })
+            .fetch('GET', 'http://10.0.2.2/wash-admin/'+item.VideoPath)
+            .then((res) => {
+                console.log(res)
+                console.log('The file saved to '+res.path())
+            })
+
+    
+    }
 
     determineIfLiked = (videoID, userID) => {
 
@@ -83,7 +123,27 @@ class Details extends Component {
 
     render(){
         const {navigation} = this.props
-        
+
+        async function requestCameraPermission() {
+            try {
+              const granted = await PermissionsAndroid.request(
+                PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+                {
+                  'title': 'Give access now',
+                  'message': 'Cool Photo App needs access to your camera ' +
+                             'so you can take awesome pictures.'
+                }
+              )
+              if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+                console.log("You can use the camera")
+              } else {
+                console.log("Camera permission denied")
+              }
+            } catch (err) {
+              console.warn(err)
+            }
+          }
+ 
        return(
             <ScrollView style={styles.container}>
                 <ImageBackground 
@@ -142,15 +202,19 @@ class Details extends Component {
                                 </View>
                             </TouchableWithoutFeedback>   
 
-                            <View style={styles.myShareIcon}>
-                                <Icon 
-                                        style={styles.shareIcon}
-                                        name='share'
-                                        color='#2c3e50'
-                                        size={25}
-                                        />
-                                <Text style={styles.text}>Share</Text>
-                            </View>
+                            <TouchableWithoutFeedback
+                                onPress={() => this.downloadVideo(navigation.state.params.passProps.item)}
+                            >
+                                <View style={styles.myShareIcon}>
+                                    <Icon 
+                                            style={styles.shareIcon}
+                                            name='arrow-circle-down'
+                                            color='#2c3e50'
+                                            size={25}
+                                            />
+                                    <Text style={styles.text}>Download</Text>
+                                </View>
+                            </TouchableWithoutFeedback>
                     </View>
                 </View>
             </ScrollView>
