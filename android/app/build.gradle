@@ -141,13 +141,6 @@ ext {
 }
 
 dependencies {
-    compile project(':rn-fetch-blob')
-    compile project(':react-native-video')
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-push-notification')
-    compile project(':react-native-pdf')
-    compile project(':react-native-orientation')
-    compile project(':react-native-linear-gradient')
     //compile project(':react-native-unity-view')
     implementation project(':rn-fetch-blob')
     implementation project(':react-native-video')

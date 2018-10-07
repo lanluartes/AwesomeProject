@@ -13,6 +13,10 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import TextGradient from 'react-native-linear-gradient'
 import { Fonts } from '../utils/Fonts';
 import Orientation from 'react-native-orientation'
+import PushNotification from 'react-native-push-notification'
+import PushController from '../../PushController'
+
+import MyView from './MyProps/MyView'
 
 const {width, height} =  Dimensions.get('window')
 
@@ -21,18 +25,40 @@ class Details extends Component {
     constructor(props) {
         super(props);
         this.state = {relation: 'unliked'}
+        this.state = {isDownloaded: false}
       }
+
 
     //add the blue indication on the download button if the download is on going or change the icon if the video is downloaded
     checkIfDownloaded = (item) => {
 
-        // only change the indication if downloaded.
+        // only change the indication if downloaded. (icon)
         // item.VideoFileName will be the one to be searched.
         //item.VideoFileName = this.props.navigation.params...
 
+        let dirs = RNFetchBlob.fs.dirs
         
-        
+        RNFetchBlob.fs.exists(dirs.SDCardApplicationDir + `/files/${item.VideoTitle}.mp4`)
+        .then((exist) => {
+            this.setState({isDownloaded: exist})
 
+        })
+        .catch((e) => { console.log(e) })
+
+
+    }
+
+    deleteVideo = (item) => {
+
+        let dirs = RNFetchBlob.fs.dirs
+
+        RNFetchBlob.fs.unlink(dirs.SDCardApplicationDir + `/files/${item.VideoTitle}.mp4`)
+        .then(() => {
+
+            this.setState({isDownloaded: false})
+
+        })
+        .catch((err) => { console.log(e) })
     }
  
     downloadVideo = (item) => {
@@ -42,25 +68,31 @@ class Details extends Component {
 
         let dirs = RNFetchBlob.fs.dirs
 
-            RNFetchBlob
-            .config({fileCache: true,
-                    addAndroidDownloads : {
-                        useDownloadManager : true,
-                        title:'tangina',
-                        notification : true,
-                        mime : 'video/mp4',
-                        description : 'File downloaded by download manager.',
-                        path: dirs.SDCardApplicationDir  + `/files/${item.VideoFileName}.wash`,
-                        mediaScannable: true
-                    }
-            })
-            .fetch('GET', 'http://10.0.2.2/wash-admin/'+item.VideoPath)
-            .then((res) => {
-                console.log(res)
-                console.log('The file saved to '+res.path())
-            })
-
-    
+        RNFetchBlob.fs.exists(dirs.SDCardApplicationDir + `/files/${item.VideoTitle}.mp4`)
+        .then((exists) => {
+                if(!exists){
+                    RNFetchBlob
+                    .config({fileCache: true,
+                            path:dirs.SDCardApplicationDir  + `/files/${item.VideoTitle}.mp4`
+                    })
+                    .fetch('GET', 'http://10.0.2.2/wash-admin/'+item.VideoPath, {})
+                    .progress({ interval : 200 }, (received, total) => {
+                        console.log('progress ' + Math.floor(received/total*100) + '%')
+                        PushNotification.localNotification({
+                            title: "My Notification Title",
+                            message: "My Notification Message", // (required)
+                        })
+                    })
+                    .then((res) => {
+                        this.setState({isDownloaded: true})
+                    })
+                }else{
+                    this.checkIfDownloaded(item)
+                }
+        })
+            
+            
+            
     }
 
     determineIfLiked = (videoID, userID) => {
@@ -108,7 +140,7 @@ class Details extends Component {
         Orientation.lockToPortrait()
 
         this.determineIfLiked(this.props.navigation.state.params.passProps.item.IdNo, this.props.navigation.state.params.passProps.user.userID);
-
+        this.checkIfDownloaded(this.props.navigation.state.params.passProps.item)
     }
 
     _gotoVideo(item) {
@@ -146,6 +178,7 @@ class Details extends Component {
  
        return(
             <ScrollView style={styles.container}>
+                <PushController />
                 <ImageBackground 
                 style={styles.thumbnail}
                 source={{uri: 'http://10.0.2.2/wash-admin/'+navigation.state.params.passProps.item.thumbnailPath}}
@@ -202,20 +235,44 @@ class Details extends Component {
                                 </View>
                             </TouchableWithoutFeedback>   
 
+
+                        {/* this is the view to hide the download button if it is already downloaded. */}
+                        <MyView hide={this.state.isDownloaded}> 
                             <TouchableWithoutFeedback
                                 onPress={() => this.downloadVideo(navigation.state.params.passProps.item)}
                             >
-                                <View style={styles.myShareIcon}>
+                                <View style={styles.myDownloadIcon}>
                                     <Icon 
-                                            style={styles.shareIcon}
+                                            style={styles.DownloadIcon}
                                             name='arrow-circle-down'
                                             color='#2c3e50'
                                             size={25}
-                                            />
+                                        />
                                     <Text style={styles.text}>Download</Text>
                                 </View>
                             </TouchableWithoutFeedback>
+                        </MyView>
+                        
+                        <MyView hide={!this.state.isDownloaded}> 
+                            <TouchableWithoutFeedback
+                                onPress={() => this.deleteVideo(navigation.state.params.passProps.item)}
+                            >
+                                <View style={styles.myDownloadIcon}>
+                                    <Icon 
+                                            style={styles.DownloadIcon}
+                                            name='times-circle-o'
+                                            color='#F25F5C'
+                                            size={26}
+                                        />
+                                    <Text style={styles.text}>Delete</Text>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        </MyView>
+
                     </View>
+
+                    
+
                 </View>
             </ScrollView>
         )
@@ -286,7 +343,7 @@ const styles = StyleSheet.create({
         height: 25
     },
 
-    shareIcon: {
+    DownloadIcon: {
         height: 25
     },
 
@@ -297,7 +354,7 @@ const styles = StyleSheet.create({
         marginRight: 40
     },
 
-    myShareIcon: {
+    myDownloadIcon: {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
