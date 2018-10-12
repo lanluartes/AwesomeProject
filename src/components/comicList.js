@@ -40,7 +40,6 @@ class ComicList extends Component{
 
     updateLike = (seriesID, userID) => {
 
-        
         const axios = require('axios');
         const myData = new FormData();
         myData.append("seriesID", seriesID);
@@ -61,10 +60,19 @@ class ComicList extends Component{
 
     }
 
+    downloadRange = seriesID => {
+        this.setState({modalVisible: false})
+        this.props.navigation.navigate('ComicDownload',  { passProps: {
+            seriesID
+            }
+        })
+    }
+
     //to initialize data from API
     componentDidMount(){
         this.getData()
     }  
+
 
     //to identify unique object
     _newPushContent = item => {
@@ -158,8 +166,20 @@ class ComicList extends Component{
                                        Description: {this.state.currentComicData.ComicDescription}
                                     </Text>
                                 </View>
-                                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginBottom: 100}}>
+                                <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginBottom: 100, flexDirection: 'row'}}>
                                         <TouchableWithoutFeedback
+                                        onPress={() => this.downloadRange(this.state.currentComicData.SeriesID)}
+                                        >
+                                        <View style={styles.myListIcon}>
+                                                <Icon 
+                                                style={styles.listIcon}
+                                                name={'arrow-down'}
+                                                color={'white'}
+                                                size={25}
+                                                />                         
+                                        </View>
+                                    </TouchableWithoutFeedback>  
+                                    <TouchableWithoutFeedback
                                         onPress={() => this.updateLike(this.state.currentComicData.SeriesID, this.props.navigation.state.params.passProps.userID)}
                                         >
                                         <View style={styles.myListIcon}>
@@ -170,7 +190,7 @@ class ComicList extends Component{
                                                 size={25}
                                                 />                         
                                         </View>
-                                    </TouchableWithoutFeedback>  
+                                    </TouchableWithoutFeedback> 
                                 </View>    
                              </View>
 
@@ -207,6 +227,11 @@ class ComicList extends Component{
 }
 
 const styles = StyleSheet.create({
+
+    myListIcon : {
+        marginRight: 15
+
+    },
     modalContainer: {
         margin: 22,
         marginBottom:22, 

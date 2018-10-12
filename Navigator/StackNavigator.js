@@ -5,6 +5,7 @@ import VideoPlayerView from '../src/components/VideoPlayerView'
 import ComicList from '../src/components/comicList'
 import ComicViewer from '../src/components/comicViewer'
 import MyList from '../src/components/MyList'
+import DownloadRange from '../src/components/downloadRange'
 
 import Splash from '../Splash'
 import TabNavigator from './TabNavigator'
@@ -29,7 +30,13 @@ const HomeNavigator = createStackNavigator({
       headerTintColor: 'white'
     }},
   Video: {screen: VideoPlayerView},
-  ComicList: {screen: ComicList}
+  ComicList: {screen: ComicList},
+  ComicDownload: {screen: DownloadRange,
+    navigationOptions:{
+      headerStyle: {backgroundColor: '#181818'},
+      headerTintColor: 'white'
+    }
+  }
 },
 {
   headerMode: 'screen'
