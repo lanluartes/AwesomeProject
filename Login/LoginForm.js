@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  AsyncStorage
 } from 'react-native';
 import * as Animatable from 'react-native-animatable'
 import Modal from 'react-native-modal'
@@ -25,6 +26,28 @@ export default class LoginForm extends Component {
         newPassword: "",
         confirmPassword: "",
     }}
+
+    this.state = {
+      stored: {
+        connection: '',
+        userID: null
+      }
+    }
+  }
+
+  componentDidMount(){
+    this._loadInitialState().done()
+  }
+
+  _loadInitialState = async () =>{
+    const value = await AsyncStorage.getItem('userID')
+    const conn = await AsyncStorage.getItem('connection')
+    if(value !== null){
+
+      this.setState({stored: {connection: conn, userID: value}})
+      console.log(this.state.stored)
+      this.props.navigation.navigate('Home', {passProps: this.state.stored});
+    }
   }
 
   _logIn = data => {
@@ -33,17 +56,22 @@ export default class LoginForm extends Component {
     myData.append("username",data.username);
     myData.append("password",data.password);
 
+    //change url 10.0.2.2 to the ip address of the device running the server. (computer)
+
     axios({
       method: 'POST',
       url: 'http://10.0.2.2/wash-admin/public/login',
       data: myData
     })
-    .then(res => this._verifyLogIn(JSON.parse(res.data)));
+    .then(res => this._verifyLogIn(JSON.parse(res.data)))
+    .catch(function(e){console.log(e)})
   }
 
   _verifyLogIn = data =>{
 
      if(data.connection === "connected"){
+       AsyncStorage.setItem('userID', data.userID);
+       AsyncStorage.setItem('connection', data.connection);
        this.props.navigation.navigate('Home', {passProps: data});
            
     }else if(data.connection === "failed"){
