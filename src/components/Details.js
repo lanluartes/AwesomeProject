@@ -78,12 +78,13 @@ class Details extends Component {
                     .fetch('GET', 'http://10.0.2.2/wash-admin/'+item.VideoPath, {})
                     .progress({ interval : 200 }, (received, total) => {
                         console.log('progress ' + Math.floor(received/total*100) + '%')
-                        PushNotification.localNotification({
-                            title: "My Notification Title",
-                            message: "My Notification Message", // (required)
-                        })
+//                        PushNotification.localNotification({
+//                            title: "My Notification Title",
+//                            message: "My Notification Message", // (required)
+//                        })
                     })
                     .then((res) => {
+                        console.log(res.path())
                         this.setState({isDownloaded: true})
                     })
                 }else{

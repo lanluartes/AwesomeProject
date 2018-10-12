@@ -8,7 +8,6 @@ import  PushController from './PushController';
 const sliderWidth = Dimensions.get('window').width;
 const itemHeight = Dimensions.get('window').height;
 
-import Carousel from 'react-native-snap-carousel'
 
 
 
