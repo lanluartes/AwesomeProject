@@ -26,6 +26,7 @@ class Details extends Component {
         super(props);
         this.state = {relation: 'unliked'}
         this.state = {isDownloaded: false}
+        this.state = {isBought: 'unbought'}
       }
 
 
@@ -113,8 +114,28 @@ class Details extends Component {
 
     }
 
+    determineIfBought = (videoID, userID) => {
+        const axios = require('axios');
+        const myData = new FormData();
+
+        myData.append("userID", userID)
+        myData.append("videoID", videoID)
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/public/checkIfBought',
+            data: myData
+          })
+          .then(res => this.updateBought(JSON.parse(res.data)))
+    }
+
     updateRelation = data => {
+        //this is for knowing if it's liked.
         this.setState({relation: data.relation})
+    }
+
+    updateBought = data => {
+        this.setState({isBought: data.relation})
     }
 
     updateLike = (videoID, userID) => {
@@ -136,6 +157,8 @@ class Details extends Component {
             data: myData
           }).then(() => this.determineIfLiked(videoID, userID))
     }
+
+    buyVideo = data
     
     componentDidMount(){
         Orientation.lockToPortrait()

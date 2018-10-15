@@ -60,11 +60,13 @@ class ComicList extends Component{
 
     }
 
-    downloadRange = seriesID => {
+    downloadRange = (seriesID,comicTitle) => {
         this.setState({modalVisible: false})
         this.props.navigation.navigate('ComicDownload',  { passProps: {
-            seriesID
+            seriesID,
+            comicTitle
             }
+
         })
     }
 
@@ -149,6 +151,7 @@ class ComicList extends Component{
                     onBackdropPress={() => {this.setModalVisible(false)}}
                     style={styles.modalContainer}
                     >
+                    
                         <Animatable.View animation="bounceInUp"  style={{flex: 1, margin: 20, flexDirection: 'column'}}>
 
                             {/* Modal header */}
@@ -168,7 +171,7 @@ class ComicList extends Component{
                                 </View>
                                 <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginBottom: 100, flexDirection: 'row'}}>
                                         <TouchableWithoutFeedback
-                                        onPress={() => this.downloadRange(this.state.currentComicData.SeriesID)}
+                                        onPress={() => this.downloadRange(this.state.currentComicData.SeriesID, this.state.currentComicData.ComicTitle)}
                                         >
                                         <View style={styles.myListIcon}>
                                                 <Icon 
@@ -214,7 +217,7 @@ class ComicList extends Component{
                                             <Ionicon name={'ios-arrow-down'} size={30} color={'#F5FCFF'}/>
                                         </View>
                                     </TouchableWithoutFeedback>
-                                </View>
+                            </View>
 
                         </Animatable.View>
                     </Modal>
