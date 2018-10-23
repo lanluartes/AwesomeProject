@@ -160,6 +160,7 @@ class Details extends Component {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     buyVideo = data => {
 
     }
@@ -175,6 +176,13 @@ class Details extends Component {
         Orientation.lockToPortrait()
 >>>>>>> parent of 5ee5601... video buying done
 
+=======
+    buyVideo = data
+    
+    componentDidMount(){
+        Orientation.lockToPortrait()
+
+>>>>>>> parent of 5ee5601... video buying done
         this.determineIfLiked(this.props.navigation.state.params.passProps.item.IdNo, this.props.navigation.state.params.passProps.user.userID);
         this.checkIfDownloaded(this.props.navigation.state.params.passProps.item)
     }
