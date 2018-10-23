@@ -158,7 +158,9 @@ class Details extends Component {
           }).then(() => this.determineIfLiked(videoID, userID))
     }
 
-    buyVideo = data
+    buyVideo = data => {
+
+    }
     
     componentDidMount(){
         Orientation.lockToPortrait()
