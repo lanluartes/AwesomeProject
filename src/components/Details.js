@@ -12,11 +12,11 @@ import RNFetchBlob from 'rn-fetch-blob'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import TextGradient from 'react-native-linear-gradient'
 import { Fonts } from '../utils/Fonts';
+import MyView from './MyProps/MyView'
 import Orientation from 'react-native-orientation'
 import PushNotification from 'react-native-push-notification'
 import PushController from '../../PushController'
 
-import MyView from './MyProps/MyView'
 
 const {width, height} =  Dimensions.get('window')
 
@@ -59,7 +59,7 @@ class Details extends Component {
             this.setState({isDownloaded: false})
 
         })
-        .catch((err) => { console.log(e) })
+        .catch((err) => { console.log(err) })
     }
  
     downloadVideo = (item) => {
@@ -79,10 +79,6 @@ class Details extends Component {
                     .fetch('GET', 'http://10.0.2.2/wash-admin/'+item.VideoPath, {})
                     .progress({ interval : 200 }, (received, total) => {
                         console.log('progress ' + Math.floor(received/total*100) + '%')
-//                        PushNotification.localNotification({
-//                            title: "My Notification Title",
-//                            message: "My Notification Message", // (required)
-//                        })
                     })
                     .then((res) => {
                         console.log(res.path())
@@ -114,10 +110,68 @@ class Details extends Component {
 
     }
 
+    updateRelation = data => {
+        //this is for knowing if it's liked.
+        this.setState({relation: data.relation})
+    }
+
+    
+    componentDidMount(){
+        Orientation.lockToPortrait()
+        
+        this.determineIfLiked(this.props.navigation.state.params.passProps.item.IdNo, this.props.navigation.state.params.passProps.user.userID);
+        this.determineIfBought(this.props.navigation.state.params.passProps.item.IdNo, this.props.navigation.state.params.passProps.user.userID);        
+        this.checkIfDownloaded(this.props.navigation.state.params.passProps.item)
+        
+    }
+    
+    _gotoVideo(item) {
+        this.props.navigation.navigate(
+            'Video', 
+            { passProps: {
+                item
+            }
+        }
+        )
+    }
+    
+    updateLike = (videoID, userID) => {
+        
+        const axios = require('axios');
+        const myData = new FormData();
+        myData.append("videoID", videoID);
+        myData.append("userID", userID);
+        
+        if(this.state.relation === 'liked'){
+            myData.append("actionID", 0);
+        }else if(this.state.relation === 'unliked'){
+            myData.append("actionID", 1);
+        }
+        
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/public/likeVideo',
+            data: myData
+        }).then(() => this.determineIfLiked(videoID, userID))
+    }
+
+    determineTransaction = data => {
+        console.log(data)
+        if(data.payment == "successful"){
+            this.setState({isBought: 'bought'})
+            this.displayIcon(this.state)
+
+        }else if(data.payment == "unsuccessful"){
+            this.setState({isBought: 'unbought'})
+            alert(data.error)
+        }
+
+    }
+    
     determineIfBought = (videoID, userID) => {
         const axios = require('axios');
         const myData = new FormData();
-
+        
         myData.append("userID", userID)
         myData.append("videoID", videoID)
 
@@ -129,54 +183,61 @@ class Details extends Component {
           .then(res => this.updateBought(JSON.parse(res.data)))
     }
 
-    updateRelation = data => {
-        //this is for knowing if it's liked.
-        this.setState({relation: data.relation})
-    }
 
     updateBought = data => {
         this.setState({isBought: data.relation})
     }
 
-    updateLike = (videoID, userID) => {
+
+    buyVideo = (videoID, userID) => {
 
         const axios = require('axios');
         const myData = new FormData();
         myData.append("videoID", videoID);
         myData.append("userID", userID);
 
-        if(this.state.relation === 'liked'){
-            myData.append("actionID", 0);
-        }else if(this.state.relation === 'unliked'){
-            myData.append("actionID", 1);
-        }
-
         axios({
             method: 'POST',
-            url: 'http://10.0.2.2/wash-admin/public/likeVideo',
+            url: 'http://10.0.2.2/wash-admin/public/buyVideo',
             data: myData
-          }).then(() => this.determineIfLiked(videoID, userID))
+          })
+          .then((res) => this.determineTransaction(JSON.parse(res.data)))
     }
 
+<<<<<<< HEAD
     buyVideo = data => {
 
     }
     
     componentDidMount(){
         Orientation.lockToPortrait()
+=======
+>>>>>>> 5ee5601991a3c27ea1340f07891557004666f35e
 
-        this.determineIfLiked(this.props.navigation.state.params.passProps.item.IdNo, this.props.navigation.state.params.passProps.user.userID);
-        this.checkIfDownloaded(this.props.navigation.state.params.passProps.item)
-    }
+    displayIcon = data => {
 
-    _gotoVideo(item) {
-        this.props.navigation.navigate(
-            'Video', 
-            { passProps: {
-                item
-                }
-            }
-        )
+        console.log(data)
+        if(data.isBought == 'bought'){
+                 return(
+                 //if bought show this
+                <Icon 
+                style={styles.iconPlay}
+                name="play-circle"
+                size={90}
+                color="white"
+                />
+                )
+        }else if(data.isBought == 'unbought'){
+                return(
+                //if unbought show this
+                    <Icon 
+                    style={styles.iconPlay}
+                    name={"tint"}
+                    size={90}
+                    color="white"
+                    />
+                  )
+        }
     }
 
     render(){
@@ -187,9 +248,8 @@ class Details extends Component {
               const granted = await PermissionsAndroid.request(
                 PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
                 {
-                  'title': 'Give access now',
-                  'message': 'Cool Photo App needs access to your camera ' +
-                             'so you can take awesome pictures.'
+                  'title': 'Wash App Kids!',
+                  'message': 'Wash App Kids! needs permission to access files for download. '
                 }
               )
               if (granted === PermissionsAndroid.RESULTS.GRANTED) {
@@ -210,16 +270,13 @@ class Details extends Component {
                 source={{uri: 'http://10.0.2.2/wash-admin/'+navigation.state.params.passProps.item.thumbnailPath}}
                 >
                     <View style={styles.buttonPlay}>
-                        <TouchableWithoutFeedback onPress={() => this._gotoVideo(navigation.state.params.passProps.item)}>
-                            <View>
-                                    <Icon 
-                                    style={styles.iconPlay}
-                                    name="play-circle"
-                                    size={90}
-                                    color="white"
-                                     />
-                            </View>
+                    
+                        <TouchableWithoutFeedback onPress={() => this.state.isBought == 'bought' ? this._gotoVideo(navigation.state.params.passProps.item) : this.buyVideo(navigation.state.params.passProps.item.IdNo, navigation.state.params.passProps.user.userID)}>
+                                <View>
+                                     {this.displayIcon(this.state)}
+                                </View>
                         </TouchableWithoutFeedback>
+
                     </View>
                 <View style={styles.nameContainer}>
                     <TextGradient colors={['transparent', '#181818', '#181818']}>
