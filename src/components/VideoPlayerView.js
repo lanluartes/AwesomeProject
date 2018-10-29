@@ -47,6 +47,7 @@ class VideoPlayerView extends Component{
                 title={<Text>{navigation.state.params.passProps.item.VideoTitle}</Text>}
                 navigator={this.props.navigator}
                 onBack={() => this._back()}
+                onEnd={() => this.props.navigation.dispatch(NavigationActions.back('Details'))}
                 fullscreen={true}
                 />
             </View>
