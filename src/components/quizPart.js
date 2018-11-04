@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button, Text, View, StyleSheet } from 'react-native'
+import { TouchableWithoutFeedback, Text, View, StyleSheet, AsyncStorage } from 'react-native'
 import Orientation from 'react-native-orientation'
 import { NavigationActions } from 'react-navigation'
 import { Fonts } from '../utils/Fonts';
@@ -13,15 +13,54 @@ class QuizPart extends Component{
 
   constructor(props) {
     super(props);
-    this.state = {seconds: 30}
+    this.state = {
+        userID: 0,
+        seconds: 30, 
+        questions: [],
+        currentQuestion: "",
+        currentChoice1: "",
+        currentChoice2: "",
+        currentChoice3: "",
+        currentCorrect: "",
+        playerPoints: 0
+    }
   }
 
     componentDidMount(){
 
+        this.getUser();
+        this.getQuestions();
+
+        Orientation.lockToPortrait();
     }
 
-    componentWillUnmount(){
+    getUser = async () => {
+        const value = await AsyncStorage.getItem('userID');
 
+        this.setState({userID: value})
+    }
+
+    getQuestions = () => {
+        const {navigation} = this.props
+
+        //console.log(navigation);
+
+        const axios = require('axios');
+        const myData = new FormData();
+
+        myData.append("videoID", navigation.state.params.passProps.item.IdNo)
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/public/getQuestions',
+            data: myData
+          })
+          .then(res => this.assignQuestions(res.data))
+    }
+
+    assignQuestions = data => {
+        this.setState({questions: data})
+        this.iterate();
     }
 
     _back(){
@@ -30,13 +69,13 @@ class QuizPart extends Component{
     }
 
     timerCountdown = () => {
-        console.log("timerCountdown")
         return (
             <View>
                 <CountDown
                             until={this.state.seconds}
                             timeToShow={['S']}
-                            onTimerChange={until=>console.log(until)}
+                            //onTimerChange={until=>console.log()}
+                            //onFinish={console.log('finish')}
                             labelS
                             size={50}
                 />
@@ -45,13 +84,21 @@ class QuizPart extends Component{
     }
 
     changeSeconds = sec => {
-        console.log(sec)
+        //console.log(sec)
         this.setState({seconds: sec})
-        // this.timerCountdown()
     } 
+
+    iterate = () => {
+        this.state.questions.forEach((question) => {
+            console.log(question.questionContent);
+        })
+        
+        //console.log(this.state.currentQuestion)
+    }
 
     render(){
         const {navigation} = this.props
+        //console.log(this.state.currentQuestion)
         return(
             <View style={styles.container}>
                 <View style={styles.timerContainer}>
@@ -67,34 +114,37 @@ class QuizPart extends Component{
                         </View>
                     </View>
                     <View style={{flex: 0.6, backgroundColor: '#F5FCFF'}}>
-                        <View
-                            style={[styles.answerContainer, {borderTopWidth: 2, borderTopStartRadius: 5, borderTopEndRadius: 5}]}
-                            >
-                            <Text style={styles.questionText}>
-                                Pluto
-                            </Text>
-                        </View>
-                        <View
-                            style={styles.answerContainer}
-                            >
-                            <Text style={styles.questionText}>
-                                Earth
-                            </Text>
-                        </View>
-                        <View
-                            style={styles.answerContainer}
-                            >
-                            <Text style={styles.questionText}>
-                                Jupiter
-                            </Text>
-                        </View>
-                        <View
-                            style={[styles.answerContainer, {borderBottomWidth: 2, borderBottomStartRadius: 5, borderBottomEndRadius: 5}]}
-                            >
-                            <Text style={styles.questionText}>
-                                Saturn
-                            </Text>
-                        </View>
+                        
+                        <TouchableWithoutFeedback>
+                            <View
+                                style={[styles.answerContainer, {borderTopWidth: 2, borderTopStartRadius: 5, borderTopEndRadius: 5}]}
+                                >
+                                <Text style={styles.questionText}>
+                                    Pluto
+                                </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+
+                        <TouchableWithoutFeedback>
+                            <View
+                                style={styles.answerContainer}
+                                >
+                                <Text style={styles.questionText}>
+                                    Earth
+                                </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+            
+                        <TouchableWithoutFeedback>
+                            <View
+                                style={[styles.answerContainer, {borderBottomWidth: 2, borderBottomStartRadius: 5, borderBottomEndRadius: 5}]}
+                                >
+                                <Text style={styles.questionText}>
+                                    Saturn
+                                </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
+                        
                     </View>
 
                     {/* <Button

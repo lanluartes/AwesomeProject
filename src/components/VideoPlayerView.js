@@ -30,12 +30,22 @@ class VideoPlayerView extends Component{
     }
 
     componentWillUnmount(){
-        Orientation.lockToPortrait()
+        Orientation.lockToPortrait()      
     }
 
     _back(){
         Orientation.lockToPortrait()
         this.props.navigation.dispatch(NavigationActions.back('Details'))
+    }
+
+    goToQuiz = (item) => {
+        this.props.navigation.navigate(
+            'QuizPart', 
+            { passProps: {
+                item
+            }
+        }
+        )
     }
 
     render(){
@@ -47,7 +57,7 @@ class VideoPlayerView extends Component{
                 title={<Text>{navigation.state.params.passProps.item.VideoTitle}</Text>}
                 navigator={this.props.navigator}
                 onBack={() => this._back()}
-                onEnd={() => this.props.navigation.dispatch(NavigationActions.back('Details'))}
+                onEnd={() => this.goToQuiz(navigation.state.params.passProps.item)}
                 fullscreen={true}
                 />
             </View>

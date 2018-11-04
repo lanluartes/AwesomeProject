@@ -16,17 +16,17 @@ import DrawerScreen from './DrawerScreen'
 import {createStackNavigator, createDrawerNavigator} from 'react-navigation';
 
 const HomeNavigator = createStackNavigator({
+  Tab: {
+    screen: TabNavigator,
+    navigationOptions:{
+      header: null
+    }},
   QuizPart: {
     screen: QuizPart,
     navigationOptions:{
       header: null
       }
   },
-  Tab: {
-    screen: TabNavigator,
-    navigationOptions:{
-    header: null
-    }},
   comicViewer: {
     screen: ComicViewer
   },
@@ -57,3 +57,21 @@ export default HomeNavigator = createDrawerNavigator({
 {
   contentComponent: props => <DrawerScreen {...props} />
 })
+
+const defaultGetStateForAction = HomeNavigator.router.getStateForAction;
+
+HomeNavigator.router.getStateForAction = (action, state) => {
+  switch (action.type) {
+    case 'Navigation/OPEN_DRAWER':
+    case 'Navigation/DRAWER_OPENED':
+      console.log("open");
+      break;
+      
+    case 'Navigation/CLOSE_DRAWER':
+    case 'Navigation/DRAWER_CLOSED':
+      console.log("close");
+      break;
+    }
+
+  return defaultGetStateForAction(action, state);
+};

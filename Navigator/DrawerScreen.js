@@ -7,10 +7,39 @@ import Icons from 'react-native-vector-icons/FontAwesome'
 
 export default class DrawerScreen extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {washPoints: 0}
+    }
+
     signOut = () => {
                 AsyncStorage.removeItem('userID')
                 AsyncStorage.removeItem('connection')
                 this.props.navigation.navigate("LogIn")
+    }
+
+    componentDidMount = () => {
+        this.getMyPoints()
+    }
+
+    getMyPoints = () => {
+        const axios = require('axios');
+        const myData = new FormData();
+
+        // console.log(this.props.navigation.state.params.passProps.userID)
+
+        myData.append("userID", this.props.navigation.state.params.passProps.userID);
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/public/getMyPoints',
+            data: myData
+        }).then((res) => this.assignMoney(res.data.washPoints))
+    }
+
+    assignMoney = data => {
+        console.log(data)
+        this.setState({washPoints: data})
     }
 
     render(){
@@ -29,7 +58,7 @@ export default class DrawerScreen extends React.Component {
                         Wash Points:
                     </Text>
                     <Text style={styles.points}>
-                        100
+                        {this.state.washPoints}
                     </Text>
                 </View>
 
@@ -138,3 +167,4 @@ const styles = StyleSheet.create({
     },
 
 });
+
