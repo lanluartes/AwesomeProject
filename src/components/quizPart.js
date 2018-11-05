@@ -89,18 +89,70 @@ class QuizPart extends Component{
     } 
 
     iterate = () => {
-        this.state.questions.forEach((question) => {
+        // this.state.questions.forEach((question) => {
+        //     this.setState({
+        //         currentQuestion: question.questionContent,
+        //         currentChoice1: question.choiceOne,
+        //         currentChoice2: question.choiceTwo,
+        //         currentChoice3: question.choiceThree,
+        //         currentCorrect: question.correctAnswer
+        //     })
+        // })
+
+        let curQues = this.state.questions.pop()
+
+        if(curQues != undefined){
             this.setState({
-                currentQuestion: question.questionContent,
-                currentChoice1: question.choiceOne,
-                currentChoice2: question.choiceTwo,
-                currentChoice3: question.choiceThree,
-                currentCorrect: question.correctAnswer
+                currentQuestion: curQues.questionContent,
+                currentChoice1: curQues.choiceOne,
+                currentChoice2: curQues.choiceTwo,
+                currentChoice3: curQues.choiceThree,
+                currentCorrect: curQues.correctAnswer
             })
-        })
-        
-        console.log(this.state.currentQuestion)
+        }else{
+            this.endQuiz();
+        }
+            
+        console.log(curQues)
     }
+
+    endQuiz = () => {
+            if(this.state.playerPoints == 5 ){
+                this.refundPoints()
+            }
+    }
+
+    refundPoints = () => {
+        const axios = require('axios');
+        const myData = new FormData();
+
+        myData.append("userID", this.state.userID)
+        myData.append("amountToAdd", 100)
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/public/addMoney',
+            data: myData
+          })
+          .then(res => this.addMoney(res.data))
+    }
+
+    checkIfRight = data => {
+            if(data == this.state.currentCorrect){
+
+                let point = this.state.playerPoints
+                point += 1;
+
+                this.setState({playerPoints: point});
+            }
+            this.iterate()
+    }
+
+    addMoney = data => {
+        console.log(data)
+    }
+
+
 
     render(){
         const {navigation} = this.props
@@ -121,7 +173,9 @@ class QuizPart extends Component{
                     </View>
                     <View style={{flex: 0.6, backgroundColor: '#F5FCFF'}}>
                         
-                        <TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback
+                            onPress={() => this.checkIfRight(this.state.currentChoice1)}
+                        >
                             <View
                                 style={[styles.answerContainer, {borderTopWidth: 2, borderTopStartRadius: 5, borderTopEndRadius: 5}]}
                                 >
@@ -131,7 +185,9 @@ class QuizPart extends Component{
                             </View>
                         </TouchableWithoutFeedback>
 
-                        <TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback
+                            onPress={() => this.checkIfRight(this.state.currentChoice2)}
+                        >
                             <View
                                 style={styles.answerContainer}
                                 >
@@ -141,7 +197,9 @@ class QuizPart extends Component{
                             </View>
                         </TouchableWithoutFeedback>
             
-                        <TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback
+                            onPress={() => this.checkIfRight(this.state.currentChoice3)}
+                        >
                             <View
                                 style={[styles.answerContainer, {borderBottomWidth: 2, borderBottomStartRadius: 5, borderBottomEndRadius: 5}]}
                                 >
