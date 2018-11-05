@@ -48,7 +48,7 @@ class QuizPart extends Component{
         const axios = require('axios');
         const myData = new FormData();
 
-        myData.append("videoID", navigation.state.params.passProps.item.IdNo)
+        myData.append("videoID", 15)
 
         axios({
             method: 'POST',
@@ -90,10 +90,16 @@ class QuizPart extends Component{
 
     iterate = () => {
         this.state.questions.forEach((question) => {
-            console.log(question.questionContent);
+            this.setState({
+                currentQuestion: question.questionContent,
+                currentChoice1: question.choiceOne,
+                currentChoice2: question.choiceTwo,
+                currentChoice3: question.choiceThree,
+                currentCorrect: question.correctAnswer
+            })
         })
         
-        //console.log(this.state.currentQuestion)
+        console.log(this.state.currentQuestion)
     }
 
     render(){
@@ -109,7 +115,7 @@ class QuizPart extends Component{
                             style={styles.questionContainer}
                             >
                             <Text style={styles.questionText}>
-                                What is the largest planet?
+                                {this.state.currentQuestion}
                             </Text>
                         </View>
                     </View>
@@ -120,7 +126,7 @@ class QuizPart extends Component{
                                 style={[styles.answerContainer, {borderTopWidth: 2, borderTopStartRadius: 5, borderTopEndRadius: 5}]}
                                 >
                                 <Text style={styles.questionText}>
-                                    Pluto
+                                {this.state.currentChoice1}
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
@@ -130,7 +136,7 @@ class QuizPart extends Component{
                                 style={styles.answerContainer}
                                 >
                                 <Text style={styles.questionText}>
-                                    Earth
+                                {this.state.currentChoice2}
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>
@@ -140,7 +146,7 @@ class QuizPart extends Component{
                                 style={[styles.answerContainer, {borderBottomWidth: 2, borderBottomStartRadius: 5, borderBottomEndRadius: 5}]}
                                 >
                                 <Text style={styles.questionText}>
-                                    Saturn
+                                {this.state.currentChoice3}
                                 </Text>
                             </View>
                         </TouchableWithoutFeedback>

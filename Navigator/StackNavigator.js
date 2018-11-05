@@ -16,17 +16,17 @@ import DrawerScreen from './DrawerScreen'
 import {createStackNavigator, createDrawerNavigator} from 'react-navigation';
 
 const HomeNavigator = createStackNavigator({
-  Tab: {
-    screen: TabNavigator,
-    navigationOptions:{
-      header: null
-    }},
   QuizPart: {
     screen: QuizPart,
     navigationOptions:{
       header: null
       }
   },
+  Tab: {
+    screen: TabNavigator,
+    navigationOptions:{
+      header: null
+    }},
   comicViewer: {
     screen: ComicViewer
   },
