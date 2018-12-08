@@ -32,7 +32,9 @@ class List extends Component {
           let responseJson = await response.json();
           this.setState({ data: responseJson});
         } catch (error) {
-          console.error(error);
+          
+            this.setState({ data: null })
+
         }
       }
 

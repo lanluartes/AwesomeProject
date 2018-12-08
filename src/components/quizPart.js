@@ -31,6 +31,10 @@ class QuizPart extends Component{
         this.getUser();
         this.getQuestions();
 
+        console.log(this.props.navigation.state.params.passProps.item.IdNo)
+
+        this.setState({videoID: this.props.navigation.state.params.passProps.item.IdNo})
+
         Orientation.lockToPortrait();
     }
 
@@ -40,15 +44,14 @@ class QuizPart extends Component{
         this.setState({userID: value})
     }
 
+
     getQuestions = () => {
         const {navigation} = this.props
-
-        //console.log(navigation);
 
         const axios = require('axios');
         const myData = new FormData();
 
-        myData.append("videoID", 15)
+        myData.append("videoID", navigation.state.params.passProps.item.IdNo)
 
         axios({
             method: 'POST',
@@ -74,7 +77,7 @@ class QuizPart extends Component{
                 <CountDown
                             until={this.state.seconds}
                             timeToShow={['S']}
-                            //onTimerChange={until=>console.log()}
+                            onTimerChange={until=>{this.setState({seconds: until})}}
                             //onFinish={console.log('finish')}
                             labelS
                             size={50}
@@ -84,20 +87,11 @@ class QuizPart extends Component{
     }
 
     changeSeconds = sec => {
-        //console.log(sec)
         this.setState({seconds: sec})
     } 
 
     iterate = () => {
-        // this.state.questions.forEach((question) => {
-        //     this.setState({
-        //         currentQuestion: question.questionContent,
-        //         currentChoice1: question.choiceOne,
-        //         currentChoice2: question.choiceTwo,
-        //         currentChoice3: question.choiceThree,
-        //         currentCorrect: question.correctAnswer
-        //     })
-        // })
+
 
         let curQues = this.state.questions.pop()
 
@@ -113,13 +107,31 @@ class QuizPart extends Component{
             this.endQuiz();
         }
             
-        console.log(curQues)
     }
 
     endQuiz = () => {
+            this.setAnswered();
             if(this.state.playerPoints == 5 ){
                 this.refundPoints()
             }
+            this._back();
+    }
+
+
+    setAnswered = () => {
+        const {navigation} = this.props
+
+        const axios = require('axios');
+        const myData = new FormData();
+
+        myData.append("userID", this.state.userID);
+        myData.append("videoID", navigation.state.params.passProps.item.IdNo);
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/public/setAnswered',
+            data: myData
+          })
     }
 
     refundPoints = () => {
@@ -138,6 +150,7 @@ class QuizPart extends Component{
     }
 
     checkIfRight = data => {
+        console.log(data)
             if(data == this.state.currentCorrect){
 
                 let point = this.state.playerPoints
@@ -156,7 +169,6 @@ class QuizPart extends Component{
 
     render(){
         const {navigation} = this.props
-        //console.log(this.state.currentQuestion)
         return(
             <View style={styles.container}>
                 <View style={styles.timerContainer}>
