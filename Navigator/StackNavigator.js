@@ -7,6 +7,8 @@ import ComicViewer from '../src/components/comicViewer'
 import MyList from '../src/components/MyList'
 import DownloadRange from '../src/components/downloadRange'
 import QuizPart from '../src/components/quizPart'
+import getStarted from '../getStarted'
+import Survey from '../survey'
 
 import Splash from '../Splash'
 import TabNavigator from './TabNavigator'
@@ -16,6 +18,11 @@ import DrawerScreen from './DrawerScreen'
 import {createStackNavigator, createDrawerNavigator} from 'react-navigation';
 
 const HomeNavigator = createStackNavigator({
+
+  Survey: {
+    screen: Survey
+  },
+
   Tab: {
     screen: TabNavigator,
     navigationOptions:{
