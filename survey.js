@@ -1,21 +1,79 @@
+// TO DO:
+//   [x] Configure the path when the user did not select any of the choices.
+//   [+] Add a dependency for pop-up modals (or use the existing one)
+//   [+] Send data to server and compute it.
+//   [+] Computation of data.
+//   [+] Return computation prediction.
+
+// LEGEND FOR TO DO:
+//   [+] - Add
+//   [x] - Modify
+//   [✓] - Accomplished
+
 import React from 'react'
 import { Text, View, TouchableWithoutFeedback, StyleSheet, TouchableOpacity } from 'react-native'
 import { Fonts } from './src/utils/Fonts';
 import Icon from 'react-native-vector-icons/FontAwesome'
+import questionObj from '../AwesomeProject/assets/files/questionnaire.json'
+import sheet from '../AwesomeProject/assets/files/sheet.json'
+
 
 class Survey extends React.Component{
 
     constructor(){
         super()
         this.state={
-            data:['0 days','1-2 days','3-4 days','5-6 days','7 days'],
-            checked: 0
+            checked: [],
+            tryData:questionObj,
+            categoryIndex: 0,
+            questionIndex: 0,
+            categoryCount: 0,
+            isLast: false,
+            nextText: 'next',
+            theAnswer: sheet
         }
     }
+
+    // WORK ON THE COLLECTION OF THE DATA
 
     static navigationOptions = {
         header: null
       };
+
+    componentDidMount(){
+    this.setState({categoryCount: this.state.tryData.categories.length})
+    }
+
+    componentDidUpdate(prevState, snapshot){
+
+    }
+
+    endSurvey = () => {
+        this.setState({nextText: 'finish'})
+    }
+
+    collectAnswer = () => {
+        this.state.theAnswer.categories[this.state.categoryIndex].answers[this.state.questionIndex].answer = this.state.checked 
+        console.log(this.state.theAnswer.categories[this.state.categoryIndex].answers[this.state.questionIndex])
+    }
+
+    nextQuestion = () => {
+        this.collectAnswer()
+        this.setState({checked: []})
+        this.state.tryData.categories[this.state.categoryIndex].questions[this.state.questionIndex].isDone = true;
+        if(this.state.questionIndex < this.state.tryData.categories[this.state.categoryIndex].questions.length - 1 ){
+            this.setState(prevState => ({questionIndex: prevState.questionIndex + 1}))
+        }else if(this.state.categoryIndex === this.state.categoryCount - 1 && this.state.questionIndex === this.state.tryData.categories[this.state.categoryIndex].questions.length - 1){
+            this.setState({nextText: 'finish'})
+            this.endSurvey()
+        }
+        else{
+            this.state.tryData.categories[this.state.categoryIndex].isDone = true;
+            this.setState({questionIndex: 0})
+            this.setState({categoryIndex: this.state.categoryIndex + 1})
+        }
+
+    }
 
     render(){
         return(
@@ -25,22 +83,24 @@ class Survey extends React.Component{
                 <View>
                     <View style={styles.categoryContainer}>
                         <Text style={styles.categoryText}>
-                            Outdoor Activities
+                            {this.state.tryData.categories[this.state.categoryIndex].name}
                         </Text>
                     </View>
 
                     <View style={styles.headerContainer}>
                         <View style={styles.remainingContainer}>
                             <Text style={styles.remainingText}>
-                                1 of 4
+                                {this.state.questionIndex + 1 } / {this.state.tryData.categories[this.state.categoryIndex].questions.length}
                             </Text>
                         </View>
 
-                        <View style={styles.nextButtonContainer}>
-                            <Text style={styles.nextText}>
-                                next
-                            </Text>
-                        </View>
+                        <TouchableWithoutFeedback onPress={() => {this.state.checked.length === 0 ? console.log('nothing selected') : this.nextQuestion()}}>
+                            <View style={styles.nextButtonContainer}>
+                                    <Text style={styles.nextText}>
+                                        {this.state.nextText}
+                                    </Text>
+                            </View>
+                        </TouchableWithoutFeedback>
                     </View>
                 </View>
 
@@ -50,17 +110,17 @@ class Survey extends React.Component{
 
                     <View style={styles.questionContainer}>
                         <Text style={styles.questionText}>
-                            How many days did you went outside barefooted?
+                            {this.state.tryData.categories[this.state.categoryIndex].questions[this.state.questionIndex].question}
                         </Text>
                     </View>
 
                     <View style={styles.choicesContainer}>
-                        {this.state.data.map((data, key) => {
+                        {this.state.tryData.categories[this.state.categoryIndex].questions[this.state.questionIndex].choices.map((data, key) => {
                             return(
                                 <View key={key} style={styles.choicesContainer}>
                                     {
-                                        this.state.checked==key?
-                                        <TouchableWithoutFeedback>
+                                        this.state.checked.includes(key)?
+                                        <TouchableWithoutFeedback onPress={()=>{this.setState({checked: this.state.checked.filter(item => item !== key )}); console.log(this.state.checked)}}>
                                             <View style={styles.choiceHighlight}>
                                                     <Icon 
                                                         style={styles.iconContainer}
@@ -72,7 +132,7 @@ class Survey extends React.Component{
                                             </View>
                                         </TouchableWithoutFeedback>
                                         :
-                                        <TouchableWithoutFeedback onPress={()=>{this.setState({checked:key})}}>
+                                        <TouchableWithoutFeedback onPress={()=>{this.setState({checked: [...this.state.checked, key]}); console.log(this.state.checked)}}>
                                             <View style={styles.choiceButton}>
                                                       <Text style={styles.choiceText}>{data}</Text>
                                             </View>
