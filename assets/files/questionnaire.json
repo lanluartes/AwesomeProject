@@ -12,7 +12,8 @@
              "Free"
            ],
            "isDone" : "false",
-           "isBranch" : "false"
+           "isBranch" : "false",
+           "isSingle" : "true"
          },
 
          {
@@ -26,7 +27,8 @@
             "Others"
           ],
           "isDone" : "false",
-          "isBranch" : "false"
+          "isBranch" : "false",
+          "isSingle" : "false"
          },
 
          {
@@ -40,7 +42,8 @@
              "Others"
            ],
            "isDone" : "false",
-           "isBranch" : "false"
+           "isBranch" : "false",
+           "isSingle" : "false"
          },
 
          {
@@ -55,7 +58,8 @@
              "Others"
            ],
            "isDone" : "false",
-           "isBranch" : "false"
+           "isBranch" : "false",
+           "isSingle" : "false"
          },
 
          {
@@ -70,7 +74,8 @@
              "Others"
            ],
            "isDone" : "false",
-           "isBranch" : "false"
+           "isBranch" : "false",
+           "isSingle" : "false"
          }
       ],
       "isDone" : "false"
@@ -87,7 +92,8 @@
             "Vomiting/Nausea"
           ],
           "isDone" : "false",
-          "isBranch" : "false"
+          "isBranch" : "false",
+          "isSingle" : "false"
         },
 
         {
@@ -101,7 +107,8 @@
             "Others"
           ],
           "isDone" : "false",
-          "isBranch" : "false"
+          "isBranch" : "false",
+          "isSingle" : "false"
         },
 
         {
@@ -115,7 +122,8 @@
             "Others"
           ],
           "isDone" : "false",
-          "isBranch" : "false"
+          "isBranch" : "false",
+          "isSingle" : "false"
         },
 
         {
@@ -126,31 +134,36 @@
           ],
           "isDone" : "false",
           "isBranch" : "true",
-          "questionsInBranch" : [{
-            "question" : "If yes, what type of toilet facility it is?",
-            "choices" : [
-              "Tank flush with septic tanks",
-              "Pour/flush latrine",
-              "Sanitary pit privy",
-              "Aqua privy",
-              "Pit privy",
-              "Bucket system"
-            ],
-            "isDone" : "false",
-            "isBranch" : "false"
-          },
-  
-          {
-            "question" : "If no, where do you urinate/defecate?",
-            "choices" : [
-              "Communal public toilet",
-              "In the river",
-              "In the field",
-              "Others"
-            ],
-            "isDone" : "false",
-            "isBranch" : "false"
-          }]
+          "isSingle" : "true"
+        },
+
+        {
+          "question" : "If yes, what type of toilet facility it is?",
+          "choices" : [
+            "Tank flush with septic tanks",
+            "Pour/flush latrine",
+            "Sanitary pit privy",
+            "Aqua privy",
+            "Pit privy",
+            "Bucket system",
+            "Skip"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        },
+        {
+          "question" : "If no, where do you urinate/defecate?",
+          "choices" : [
+            "Communal public toilet",
+            "In the river",
+            "In the field",
+            "Others",
+            "Skip"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
         },
         {
           "question" : "Do you have a pet?",
@@ -160,18 +173,19 @@
           ],
           "isDone" : "false",
           "isBranch" : "true",
-          "questionsInBranch":[
-            {
-              "question" : "Where does your pet litter?",
-              "choices" : [
-                "Backyard",
-                "Near the river",
-                "Other"
-              ],
-              "isDone" : "false",
-              "isBranch" : "false"
-            }
-          ]
+          "isSingle" : "true"
+        },
+        {
+          "question" : "Where does your pet litter?",
+          "choices" : [
+            "Backyard",
+            "Near the river",
+            "Other",
+            "Skip"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
         },
         {
           "question" : "Have you done the following activities in the river?",
@@ -185,13 +199,14 @@
             "Others"
           ],
           "isDone" : "false",
-          "isBranch" : "false"
+          "isBranch" : "false",
+          "isSingle" : "false"
         }
       ],
       "isDone" : "false"
     },
 
-  {
+   {
       "name":"Ecological Sanitation",
       "questions": [
         {
@@ -205,7 +220,8 @@
             "Others"
           ],
           "isDone" : "false",
-          "isBranch" : "false"
+          "isBranch" : "false",
+          "isSingle" : "false"
         },
 
         {
@@ -216,30 +232,30 @@
           ],
           "isDone" : "false",
           "isBranch" : "true",
-          "questionsInBranch" : [
-            {
-              "question" : "If yes, do you use a fertilizer?",
-              "choices" : [
-                "Yes",
-                "No"
-              ],
-              "isDone" : "false",
-              "isBranch" : "true",
-              "subBranch" : [
-                {
-                  "question" : "What kind of fertlizer do you use?",
-                  "choices" : [
-                    "Organic (Manure)",
-                    "Inorganic"
-                  ],
-                  "isDone" : "false",
-                  "isBranch" : "false"
-                }
-              ]
-            }
-          ]
+          "isSingle" : "true"
         },
-
+        { 
+          "question" : "If yes, do you use a fertilizer? (Only answer is you choose YES)",
+          "choices" : [
+            "Yes",
+            "No",
+            "Skip"
+          ],
+          "isDone" : "false",
+          "isBranch" : "true",
+          "isSingle" : "true"
+        },
+        {
+          "question" : "What kind of fertlizer do you use? (Only answer is you choose YES)",
+          "choices" : [
+            "Organic (Manure)",
+            "Inorganic",
+            "Skip"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "true"         
+        },
         {
           "question" : "Do you have livestock/s?",
           "choices" : [
@@ -248,39 +264,41 @@
           ],
           "isDone" : "false",
           "isBranch" : "true",
-          "questionsInBranch": [
-            {
-              "question" : "If yes, what kind of livestock/s?",
-              "choices" : [
-                "Poultry",
-                "Piggery",
-                "Cattle",
-                "Sheep",
-                "Goats",
-                "Others"
-              ],
-              "isDone" : "false",
-              "isBranch" : "false"
-            },
-    
-            {
-              "question" : "How do you manage livestock manure?",
-              "choices" : [
-                "Collect",
-                "Use as fertilizer",
-                "Throw in the river",
-                "Bury",
-                "Pass through a septic tank",
-                "Recycle as source of energy",
-                "Others"
-              ],
-              "isDone" : "false",
-              "isBranch" : "false"
-            }
+          "isSingle" : "true"
+        },
+        {
+          "question" : "If yes, what kind of livestock/s? (Only answer is you choose YES)",
+          "choices" : [
+            "Poultry",
+            "Piggery",
+            "Cattle",
+            "Sheep",
+            "Goats",
+            "Others",
+            "Skip"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        },
+        {
+          "question" : "How do you manage livestock manure? (Only answer is you choose YES)",
+          "choices" : [
+            "Collect",
+            "Use as fertilizer",
+            "Throw in the river",
+            "Bury",
+            "Pass through a septic tank",
+            "Recycle as source of energy",
+            "Others",
+            "Skip"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        }
           ]
         }
       ],
       "isDone" : "false"
-    }
-  ]
 }

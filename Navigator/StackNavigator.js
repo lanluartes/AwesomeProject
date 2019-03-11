@@ -19,14 +19,14 @@ import {createStackNavigator, createDrawerNavigator} from 'react-navigation';
 
 const HomeNavigator = createStackNavigator({
   
-  Survey: {
-    screen: Survey
-  },
   Tab: {
     screen: TabNavigator,
     navigationOptions:{
       header: null
     }},
+  Survey: {
+    screen: Survey
+  },
   QuizPart: {
     screen: QuizPart,
     navigationOptions:{

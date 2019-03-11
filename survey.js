@@ -20,6 +20,7 @@ import sheet from '../AwesomeProject/assets/files/sheet.json'
 
 class Survey extends React.Component{
 
+
     constructor(){
         super()
         this.state={
@@ -30,7 +31,9 @@ class Survey extends React.Component{
             categoryCount: 0,
             isLast: false,
             nextText: 'next',
-            theAnswer: sheet
+            theAnswer: sheet,
+            subQuestion: null,
+            subChoices: null
         }
     }
 
@@ -40,40 +43,78 @@ class Survey extends React.Component{
         header: null
       };
 
+
     componentDidMount(){
     this.setState({categoryCount: this.state.tryData.categories.length})
     }
 
-    componentDidUpdate(prevState, snapshot){
+    checkIfChoiceLeadsToBranch = () => {
 
+    }
+
+    componentDidUpdate(prevState, snapshot){
+        // if(categoryIndex == 1 && questionIndex == 3){
+        //     if(this.state.checked == 0){
+        //         this.setState({questionIndex: this.state.questionIndex + 1})
+        //     }
+        // }
+
+        // console.log(snapshot.checked)
+    }
+
+    sendSurvey = data => {
+        const axios = require('axios');
+        const myData = new FormData();
+
+        myData.append("Answers", this.state.theAnswer)
+
+        // axios({
+        //     method: 'POST',
+        //     url: 'http://10.0.2.2/wash-admin/private/calculatedata',
+        //     data: myData
+        //   })
+        //   .then(res => {console.log(res.data)})
+        //   .catch(function(e){console.log(e)})
+
+        console.log(myData)
     }
 
     endSurvey = () => {
         this.setState({nextText: 'finish'})
+        this.sendSurvey()
     }
 
     collectAnswer = () => {
-        this.state.theAnswer.categories[this.state.categoryIndex].answers[this.state.questionIndex].answer = this.state.checked 
-        console.log(this.state.theAnswer.categories[this.state.categoryIndex].answers[this.state.questionIndex])
+        let someshit = this.state.theAnswer
+        someshit.categories[this.state.categoryIndex].answers[this.state.questionIndex].answer = this.state.checked
+        this.setState({theAnswer: someshit})
+        this.setState({checked: []})
     }
 
     nextQuestion = () => {
         this.collectAnswer()
         this.setState({checked: []})
         this.state.tryData.categories[this.state.categoryIndex].questions[this.state.questionIndex].isDone = true;
+
         if(this.state.questionIndex < this.state.tryData.categories[this.state.categoryIndex].questions.length - 1 ){
+
             this.setState(prevState => ({questionIndex: prevState.questionIndex + 1}))
+
         }else if(this.state.categoryIndex === this.state.categoryCount - 1 && this.state.questionIndex === this.state.tryData.categories[this.state.categoryIndex].questions.length - 1){
+           
             this.setState({nextText: 'finish'})
             this.endSurvey()
+
         }
         else{
+
             this.state.tryData.categories[this.state.categoryIndex].isDone = true;
             this.setState({questionIndex: 0})
             this.setState({categoryIndex: this.state.categoryIndex + 1})
-        }
 
+        }
     }
+
 
     render(){
         return(
@@ -115,32 +156,71 @@ class Survey extends React.Component{
                     </View>
 
                     <View style={styles.choicesContainer}>
-                        {this.state.tryData.categories[this.state.categoryIndex].questions[this.state.questionIndex].choices.map((data, key) => {
-                            return(
-                                <View key={key} style={styles.choicesContainer}>
-                                    {
-                                        this.state.checked.includes(key)?
-                                        <TouchableWithoutFeedback onPress={()=>{this.setState({checked: this.state.checked.filter(item => item !== key )}); console.log(this.state.checked)}}>
-                                            <View style={styles.choiceHighlight}>
-                                                    <Icon 
-                                                        style={styles.iconContainer}
-                                                        name={'check'}
-                                                        color={'white'}
-                                                        size={30}
-                                                        />   
-                                                        <Text style={[styles.choiceText, {marginLeft: 0}]}>{data}</Text>
-                                            </View>
-                                        </TouchableWithoutFeedback>
-                                        :
-                                        <TouchableWithoutFeedback onPress={()=>{this.setState({checked: [...this.state.checked, key]}); console.log(this.state.checked)}}>
-                                            <View style={styles.choiceButton}>
-                                                      <Text style={styles.choiceText}>{data}</Text>
-                                            </View>
-                                        </TouchableWithoutFeedback>
-                                    }
-                                </View>
-                            );
-                        })}
+                        {
+                        this.state.tryData.categories[this.state.categoryIndex].questions[this.state.questionIndex].choices.map((data, key) =>                 
+                        {   
+                          
+                            let returnComp;
+                            
+                            if(this.state.tryData.categories[this.state.categoryIndex].questions[this.state.questionIndex].isSingle === 'true'){    
+
+
+                                returnComp = 
+                                    <View key={key} style={styles.choicesContainer}>
+                                        {   
+                                            this.state.checked==key?
+                                            <TouchableWithoutFeedback>
+                                                <View style={styles.choiceHighlight}>
+                                                        <Icon 
+                                                            style={styles.iconContainer}
+                                                            name={'check'}
+                                                            color={'white'}
+                                                            size={30}
+                                                            />   
+                                                            <Text style={[styles.choiceText, {marginLeft: 0}]}>{data}</Text>
+                                                </View>
+                                            </TouchableWithoutFeedback>
+                                            :
+                                            <TouchableWithoutFeedback onPress={()=>{this.setState({checked:key})}}>
+                                                <View style={styles.choiceButton}>
+                                                          <Text style={styles.choiceText}>{data}</Text>
+                                                </View>
+                                            </TouchableWithoutFeedback>
+                                        }
+                                    </View>
+                                
+                            }
+                            else if(this.state.tryData.categories[this.state.categoryIndex].questions[this.state.questionIndex].isSingle === 'false')
+                            {   
+                                returnComp = 
+                                    <View key={key} style={styles.choicesContainer}>
+                                        {   
+                                            this.state.checked.includes(key)?
+                                            <TouchableWithoutFeedback onPress={()=>{this.setState({checked: this.state.checked.filter(item => item !== key )})}}> 
+                                                <View style={styles.choiceHighlight}>
+                                                        <Icon 
+                                                            style={styles.iconContainer}
+                                                            name={'check'}
+                                                            color={'white'}
+                                                            size={30}
+                                                            />   
+                                                            <Text style={[styles.choiceText, {marginLeft: 0}]}>{data}</Text>
+                                                </View>
+                                            </TouchableWithoutFeedback>
+                                            :
+                                            <TouchableWithoutFeedback onPress={()=>{this.setState({checked: [...this.state.checked, key]})}}>
+
+                                                <View style={styles.choiceButton}>
+                                                          <Text style={styles.choiceText}>{data}</Text>
+                                                </View>
+                                            </TouchableWithoutFeedback>
+                                        }
+                                    </View>
+                            }
+
+                            return returnComp;
+                        })
+                        }
 
                     </View>
 

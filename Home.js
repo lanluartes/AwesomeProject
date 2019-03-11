@@ -1,5 +1,5 @@
 import React, { Component } from 'React';
-import {Alert, View, Text, StyleSheet, Image, Dimensions, ImageBackground, AppState} from 'react-native';
+import {Alert, View, Text, StyleSheet, Image, Dimensions, ImageBackground, AppState, AsyncStorage} from 'react-native';
 import { Fonts } from './src/utils/Fonts';
 import Swiper from 'react-native-swiper';
 import PushNotification, { requestPermissions } from 'react-native-push-notification';
@@ -38,11 +38,48 @@ export default class Home extends React.Component{
         this.handleAppStateChange = this.handleAppStateChange.bind(this);
         this.state = {
           seconds: 5,
+          myID: null
         }
+      }
+
+      goOnline = async () => {
+        let someID = await AsyncStorage.getItem('userID')
+        this.setState({myID: someID})
+
+        this._online()
+      }
+
+      _online = () => {
+        const axios = require('axios');
+        const myData = new FormData();
+
+        myData.append('userID', this.state.myID)
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/private/online',
+            data: myData
+          })
+          .catch(function(e){console.log(e)})
+      }
+
+      _offline = () => {
+        const axios = require('axios');
+        const myData = new FormData();
+
+        myData.append('userID', this.state.myID)
+
+        axios({
+            method: 'POST',
+            url: 'http://10.0.2.2/wash-admin/private/offline',
+            data: myData
+          })
+          .catch(function(e){console.log(e)})
       }
     
       componentDidMount(){
         AppState.addEventListener('change', this.handleAppStateChange);
+        this.goOnline()
       }
     
       componentWillUnmount(){
@@ -57,6 +94,8 @@ export default class Home extends React.Component{
               message: "Wash Hands now, and get free WASH points.",
               date,
             });
+
+            this._offline()
           }
       }
 
