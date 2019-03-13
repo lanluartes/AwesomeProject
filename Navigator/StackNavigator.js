@@ -58,7 +58,8 @@ const HomeNavigator = createStackNavigator({
 
 export default HomeNavigator = createDrawerNavigator({
     Home: {screen: HomeNavigator},
-    MyList: {screen: MyList}
+    MyList: {screen: MyList},
+    Survey: {screen: Survey}
 },
 {
   contentComponent: props => <DrawerScreen {...props} />

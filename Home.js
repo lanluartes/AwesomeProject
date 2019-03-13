@@ -196,7 +196,7 @@ export default class Home extends React.Component{
                 {/*this panel is used for holding the buttons that lead to other processes -stream video, read comics, play games-*/}
                 <View style={styles.mainBox}>
                     <ImageBackground
-                    source={require('./assets/Images/mad.jpg')}
+                    source={require('./assets/Images/Reference.png')}
                     style={{flex: 1, margin: 10}}
                     >
 

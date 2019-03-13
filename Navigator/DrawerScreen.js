@@ -64,6 +64,20 @@ export default class DrawerScreen extends React.Component {
 
                 <View style={{ flex: 2, padding: 2, flexDirection: 'column', flexWrap: 'wrap'}}>                 
                     <TouchableOpacity style={{height: 75, width: 275}}
+                    onPress={() => {this.props.navigation.navigate('Home')}}
+                    >
+                        <View style={{flex: 1, flexDirection: 'row', padding: 20}}>
+                            <Icons 
+                            size={30}
+                            name={"home"}
+                            color={"#3498db"}
+                            />
+                            <Text style={styles.listRow}>
+                                    Home
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{height: 75, width: 275}}
                     onPress={() => {this.props.navigation.navigate('MyList')}}
                     >
                         <View style={{flex: 1, flexDirection: 'row', padding: 20}}>
@@ -79,7 +93,7 @@ export default class DrawerScreen extends React.Component {
                     </TouchableOpacity>
 
                     <TouchableOpacity style={{height: 75, width: 275}}
-                    onPress={() => {this.props.navigation.navigate('MyList')}}
+                    onPress={() => {this.props.navigation.navigate('Survey')}}
                     >
                         <View style={{flex: 1, flexDirection: 'row', padding: 20}}>
                             <Icons 
@@ -88,10 +102,11 @@ export default class DrawerScreen extends React.Component {
                             color={"#FFE066"}
                             />
                             <Text style={styles.listRow}>
-                                    My Achievements
+                                    My Survey
                             </Text>
                         </View>
                     </TouchableOpacity>
+
                 </View>
             
                 <View style={{ flex: 0.5, padding: 2, flexDirection: 'column', flexWrap: 'wrap', justifyContent: 'center'}}>  
