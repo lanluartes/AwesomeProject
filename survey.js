@@ -15,7 +15,10 @@ import { Text, View, TouchableWithoutFeedback, StyleSheet, TouchableOpacity } fr
 import { Fonts } from './src/utils/Fonts';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import questionObj from '../AwesomeProject/assets/files/questionnaire.json'
+import questionObj1 from '../AwesomeProject/assets/files/questionnaire1.json'
 import sheet from '../AwesomeProject/assets/files/sheet.json'
+import sheet1 from '../AwesomeProject/assets/files/sheet1.json'
+
 
 
 class Survey extends React.Component{
@@ -25,15 +28,17 @@ class Survey extends React.Component{
         super()
         this.state={
             checked: [],
-            tryData:questionObj,
+            testAnswer: {},
+            tryData:questionObj1,
             categoryIndex: 0,
             questionIndex: 0,
             categoryCount: 0,
             isLast: false,
             nextText: 'next',
-            theAnswer: sheet,
+            theAnswer: sheet1,
             subQuestion: null,
-            subChoices: null
+            subChoices: null,
+            enteredSources: []
         }
     }
 
@@ -43,9 +48,9 @@ class Survey extends React.Component{
         header: null
       };
 
-
     componentDidMount(){
     this.setState({categoryCount: this.state.tryData.categories.length})
+    this.setState({testAnswer: {category : []}})
     }
 
     checkIfChoiceLeadsToBranch = () => {
@@ -60,6 +65,7 @@ class Survey extends React.Component{
         // }
 
         // console.log(snapshot.checked)
+        console.log(this.state.testAnswer)
     }
 
     sendSurvey = data => {

@@ -1,0 +1,114 @@
+{
+    "categories":[
+    {
+    "name" : "River Questions",
+    "answers":[
+        {
+          "question" : "Do you have livestock/s?",
+          "answer": null
+        },
+        {
+          "question" : "If yes, what kind of livestock/s?",
+          "answer": null
+        },
+        {
+          "question" : "How do you manage livestock manure?",
+          "answer": null
+        },
+        {
+          "question" : "How do you deal with your waste disposal?",
+          "answer": null
+        },
+        {
+          "question" : "Have you done the following activities in the river?",
+          "answer": null
+        },
+        {
+          "question" : "Do you have a pet?",
+          "answer": null
+        },
+        {
+          "question" : "Where does your pet litter?",
+          "answer": null
+        },
+        {
+          "question" : "Do you have toilet facility?",
+          "answer": null
+        },
+        {
+          "question" : "If yes, what type of toilet facility it is?",
+          "answer": null
+        },
+        {
+          "question" : "If no, where do you urinate/defecate?",
+          "answer": null
+        }
+        ]
+    },
+    {
+        "name" : "Standards of living and water sources",
+        "answers" : [
+        {
+            "question" : "What is your housing status of ownership?",
+            "answer": null
+            },
+    
+            {
+            "question" : "What are your sources of potable water?",
+            "answer": null
+            },
+    
+            {
+            "question" : "What are the sources of your secondary sources?",
+            "answer": null
+            },
+    
+            {
+            "question" : "What are you using the potable water supply for? (Check as much as possible)",
+            "answer": null
+            },
+    
+            {
+            "question" : "What are you using the secondary water supply for?",
+            "answer": null
+            }
+        ]
+      },
+    {
+        "name":"Health, Sanitation and Hygiene",
+        "answers":[
+            {
+                "question" : "Check the symptoms that members of your family are displaying",
+                "answer": null
+              },
+      
+              {
+                "question" : "Are there any members of the family diagnosed with waterborne diseases such as:",
+                "answer": null
+              },
+      
+              {
+                "question" : "Which of the following practices prevent waterborne related diseases?",
+                "answer": null
+              }
+            ]
+        },
+        {
+            "name":"Ecological Sanitation",
+            "answers":[
+                {
+                    "question" : "Do you have a garden or agricultural land?",
+                    "answer": null
+                },
+                {
+                    "question" : "If yes, do you use a fertilizer?",
+                    "answer": null
+                },
+                {
+                    "question" : "What kind of fertlizer do you use?",
+                    "answer": null
+                }
+            ]
+            }
+        ]
+        }

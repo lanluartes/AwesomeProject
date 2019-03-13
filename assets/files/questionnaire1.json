@@ -1,0 +1,291 @@
+{
+  "categories" : [
+    {
+      "name": "River Questions",
+      "questions": [
+        {
+          "question" : "Do you have livestock/s?",
+          "choices" : [
+            "Yes",
+            "No"
+          ],
+          "isDone" : "false",
+          "isBranch" : "true",
+          "isSingle" : "true"
+        },
+        {
+          "question" : "If yes, what kind of livestock/s?",
+          "choices" : [
+            "Poultry",
+            "Piggery",
+            "Cattle",
+            "Sheep",
+            "Goats"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        },
+        {
+          "question" : "How do you manage livestock manure?",
+          "choices" : [
+            "Collect",
+            "Use as fertilizer",
+            "Throw in the river",
+            "Bury",
+            "Pass through a septic tank",
+            "Recycle as source of energy"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        },
+        {
+          "question" : "How do you deal with your waste disposal?",
+          "choices" : [
+            "Own compost pit",
+            "Burn",
+            "Segregated",
+            "Mix (Non/biodegradable)",
+            "Thrown in the river"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        },
+        {
+          "question" : "Have you done the following activities in the river?",
+          "choices" : [
+            "Laundry",
+            "Defecating",
+            "Urinating",
+            "Drainage catch basin"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        },
+        {
+          "question" : "Do you have a pet?",
+          "choices" : [
+            "Yes",
+            "No"
+          ],
+          "isDone" : "false",
+          "isBranch" : "true",
+          "isSingle" : "true"
+        },
+        {
+          "question" : "Where does your pet litter?",
+          "choices" : [
+            "Backyard",
+            "Near the river",
+            "Other"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        },
+        {
+          "question" : "Do you have toilet facility?",
+          "choices" : [
+            "Yes",
+            "No"
+          ],
+          "isDone" : "false",
+          "isBranch" : "true",
+          "isSingle" : "true"
+        },
+        {
+          "question" : "If yes, what type of toilet facility it is?",
+          "choices" : [
+            "Tank flush with septic tanks",
+            "Pour/flush latrine",
+            "Sanitary pit privy",
+            "Aqua privy",
+            "Pit privy",
+            "Bucket system"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        },
+        {
+          "question" : "If no, where do you urinate/defecate?",
+          "choices" : [
+            "Communal public toilet",
+            "In the river",
+            "In the field"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        }
+        ]
+    },
+    {
+      "name" : "Standards of living and water sources",
+      "questions" : [
+         {
+           "question" : "What is your housing status of ownership?",
+           "choices" : [
+             "Owned",
+             "Shared",
+             "Rented",
+             "Free"
+           ],
+           "isDone" : "false",
+           "isBranch" : "false",
+           "isSingle" : "true"
+         },
+
+         {
+           "question" : "What are your sources of potable water?",
+           "choices" : [
+            "Hand pump/tube well",
+            "Improved spring",
+            "Rain water",
+            "Bottled water",
+            "Standpipe/Public faucet"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+         },
+
+         {
+           "question" : "What are the sources of your secondary sources?",
+           "choices" : [
+             "Hand pump/tube well",
+             "Improved spring",
+             "Rain water",
+             "Bottled water",
+             "Standpipe/Public faucet"
+           ],
+           "isDone" : "false",
+           "isBranch" : "false",
+           "isSingle" : "false"
+         },
+
+         {
+           "question" : "What are you using the potable water supply for? (Check as much as possible)",
+           "choices" : [
+             "Drinking",
+             "Cooking",
+             "Bathing",
+             "Cleaning",
+             "Laundry",
+             "Toilet Use"
+           ],
+           "isDone" : "false",
+           "isBranch" : "false",
+           "isSingle" : "false"
+         },
+
+         {
+           "question" : "What are you using the secondary water supply for?",
+           "choices" : [
+             "Drinking",
+             "Cooking",
+             "Bathing",
+             "Cleaning",
+             "Laundry",
+             "Toilet Use"
+           ],
+           "isDone" : "false",
+           "isBranch" : "false",
+           "isSingle" : "false"
+         }
+      ],
+      "isDone" : "false"
+    },
+
+  {
+      "name":"Health, Sanitation and Hygiene",
+      "questions":[
+        {
+          "question" : "Check the symptoms that members of your family are displaying",
+          "choices" : [
+            "Diarrheal",
+            "Stomach Ache",
+            "Vomiting/Nausea"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        },
+
+        {
+          "question" : "Are there any members of the family diagnosed with waterborne diseases such as:",
+          "choices" : [
+            "Gastroenteritis",
+            "Intestinal worms",
+            "Amoebiasis",
+            "Fungal infection",
+            "Cholera",
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        },
+
+        {
+          "question" : "Which of the following practices prevent waterborne related diseases?",
+          "choices" : [
+            "Boil drinking water",
+            "Chlorinate drinking water",
+            "Bathe regularly",
+            "Wash hands with soap after toilet use",
+            "Reduce stagnant water in the house"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        }
+
+      ],
+      "isDone" : "false"
+    },
+
+  {
+      "name":"Ecological Sanitation",
+      "questions": [
+        {
+          "question" : "Do you have a garden or agricultural land?",
+          "choices" : [
+            "Yes",
+            "No"
+          ],
+          "isDone" : "false",
+          "isBranch" : "true",
+          "isSingle" : "true",
+          "questionsInBranch" : [
+            {
+              "question" : "If yes, do you use a fertilizer?",
+              "choices" : [
+                "Yes",
+                "No"
+              ],
+              "isDone" : "false",
+              "isBranch" : "true",
+              "isSingle" : "true",
+              "subBranch" : [
+                {
+                  "question" : "What kind of fertlizer do you use?",
+                  "choices" : [
+                    "Organic (Manure)",
+                    "Inorganic"
+                  ],
+                  "isDone" : "false",
+                  "isBranch" : "false",
+                  "isSingle" : "true"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "isDone" : "false"
+    }
+  ]
+}
