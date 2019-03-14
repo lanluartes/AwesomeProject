@@ -80,7 +80,7 @@
           "choices" : [
             "Backyard",
             "Near the river",
-            "Other"
+            "In the house"
           ],
           "isDone" : "false",
           "isBranch" : "false",
@@ -115,7 +115,7 @@
           "choices" : [
             "Communal public toilet",
             "In the river",
-            "In the field"
+            "In the field"  
           ],
           "isDone" : "false",
           "isBranch" : "false",
@@ -138,7 +138,6 @@
            "isBranch" : "false",
            "isSingle" : "true"
          },
-
          {
            "question" : "What are your sources of potable water?",
            "choices" : [
@@ -152,50 +151,19 @@
           "isBranch" : "false",
           "isSingle" : "false"
          },
-
          {
-           "question" : "What are the sources of your secondary sources?",
-           "choices" : [
-             "Hand pump/tube well",
-             "Improved spring",
-             "Rain water",
-             "Bottled water",
-             "Standpipe/Public faucet"
-           ],
-           "isDone" : "false",
-           "isBranch" : "false",
-           "isSingle" : "false"
-         },
-
-         {
-           "question" : "What are you using the potable water supply for? (Check as much as possible)",
-           "choices" : [
-             "Drinking",
-             "Cooking",
-             "Bathing",
-             "Cleaning",
-             "Laundry",
-             "Toilet Use"
-           ],
-           "isDone" : "false",
-           "isBranch" : "false",
-           "isSingle" : "false"
-         },
-
-         {
-           "question" : "What are you using the secondary water supply for?",
-           "choices" : [
-             "Drinking",
-             "Cooking",
-             "Bathing",
-             "Cleaning",
-             "Laundry",
-             "Toilet Use"
-           ],
-           "isDone" : "false",
-           "isBranch" : "false",
-           "isSingle" : "false"
-         }
+          "question" : "What are the sources of your secondary sources?",
+          "choices" : [
+            "Hand pump/tube well",
+            "Open dug well",
+            "Underground spring",
+            "Rain water",
+            "River"
+          ],
+          "isDone" : "false",
+          "isBranch" : "false",
+          "isSingle" : "false"
+        }
       ],
       "isDone" : "false"
     },
@@ -222,7 +190,7 @@
             "Intestinal worms",
             "Amoebiasis",
             "Fungal infection",
-            "Cholera",
+            "Cholera"
           ],
           "isDone" : "false",
           "isBranch" : "false",

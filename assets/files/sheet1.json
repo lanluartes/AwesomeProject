@@ -61,16 +61,6 @@
             {
             "question" : "What are the sources of your secondary sources?",
             "answer": null
-            },
-    
-            {
-            "question" : "What are you using the potable water supply for? (Check as much as possible)",
-            "answer": null
-            },
-    
-            {
-            "question" : "What are you using the secondary water supply for?",
-            "answer": null
             }
         ]
       },

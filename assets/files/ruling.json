@@ -1,0 +1,202 @@
+{
+    "categories" : [
+    {
+        "name": "River Related",
+        "questions":[
+              {
+                "question" : "Do you have livestock/s?",
+                "choices" : [
+                    8,
+                    1
+                ]
+              },
+              {
+                "question" : "If yes, what kind of livestock/s?",
+                "choices" : [
+                    5,
+                    7,
+                    6,
+                    6,
+                    6
+                ]
+              },
+              {
+                "question" : "How do you manage livestock manure?",
+                "choices" : [
+                    7,
+                    8,
+                    9,
+                    8,
+                    4,
+                    6
+                ]
+              },
+              {
+                "question" : "How do you deal with your waste disposal?",
+                "choices" : [
+                    1,
+                    2,
+                    1,
+                    1,
+                    3,
+                    5
+                ]
+              },
+              {
+                "question" : "Have you done the following activities in the river?",
+                "choices" : [
+                  1.4,
+                  1.4,
+                  1.3,
+                  1.3
+                ]
+              },
+              {
+                "question" : "Do you have a pet?",
+                "choices" : [
+                    1.3,
+                    1.0
+                ]
+              },
+              {
+                "question" : "Where does your pet litter?",
+                "choices" : [
+                    3,
+                    4,
+                    6
+                ]
+              },
+              {
+                "question" : "Do you have toilet facility?",
+                "choices" : [
+                    1,
+                    1.4
+                ]
+              },
+              {
+                "question" : "If yes, what type of toilet facility it is?",
+                "choices" : [
+                    1,
+                    2,
+                    4,
+                    4,
+                    4,
+                    7
+                ]
+              },
+              {
+                "question" : "If no, where do you urinate/defecate?",
+                "choices" : [
+                    5,
+                    7,
+                    7
+                ]
+              }
+        ]
+    },
+      {
+        "name" : "Standards of living and water sources",
+        "questions" : [
+           {
+             "question" : "What is your housing status of ownership?",
+             "choices" : [
+               3,
+               6,
+               6,
+               5
+             ]
+           },
+  
+           {
+             "question" : "What are your sources of potable water?",
+             "choices" : [
+               0.8,
+               0.5,
+               0.8,
+               0.1,
+               0.5
+            ]
+           },
+  
+           {
+             "question" : "What are the sources of your secondary sources?",
+             "choices" : [
+               1.4,
+               1.2,
+               1.5,
+               1,
+               1.3
+             ]
+           }
+        ],
+        "isDone" : "false"
+      },
+  
+    {
+        "name":"Health, Sanitation and Hygiene",
+        "questions":[
+          {
+            "question" : "Check the symptoms that members of your family are displaying",
+            "choices" : [
+              8,
+              6,
+              7
+            ]
+          },
+  
+          {
+            "question" : "Are there any members of the family diagnosed with waterborne diseases such as:",
+            "choices" : [
+              3,
+              3,
+              4,
+              4,
+              5
+            ]
+          },
+  
+          {
+            "question" : "Which of the following practices prevent waterborne related diseases?",
+            "choices" : [
+              0.1,
+              0.2,
+              0.1,
+              0.1,
+              0.2
+            ]
+          }
+        ],
+        "isDone" : "false"
+      },
+  
+     {
+        "name":"Ecological Sanitation",
+        "questions": [
+          {
+            "question" : "Do you have a garden or agricultural land?",
+            "choices" : [
+              5,
+              1
+            ]
+          },
+          {
+            "question" : "If yes, do you use a fertilizer? (Only answer is you choose YES)",
+            "choices" : [
+              5,
+              1
+            ]
+          },
+          {
+            "question" : "What kind of fertlizer do you use? (Only answer is you choose YES)",
+            "choices" : [
+              8,
+              5
+            ]
+          }
+          
+            ]
+          }
+        ],
+        "isDone" : "false"
+  }
+  

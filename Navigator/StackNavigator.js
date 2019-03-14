@@ -9,6 +9,10 @@ import DownloadRange from '../src/components/downloadRange'
 import QuizPart from '../src/components/quizPart'
 import getStarted from '../getStarted'
 import Survey from '../survey'
+import rew from '../rewards'
+import multiplierSurvey from '../multiplier'
+
+
 
 import Splash from '../Splash'
 import TabNavigator from './TabNavigator'
@@ -18,7 +22,9 @@ import DrawerScreen from './DrawerScreen'
 import {createStackNavigator, createDrawerNavigator} from 'react-navigation';
 
 const HomeNavigator = createStackNavigator({
-  
+  reward:{
+    screen:rew 
+  },
   Tab: {
     screen: TabNavigator,
     navigationOptions:{
@@ -26,6 +32,9 @@ const HomeNavigator = createStackNavigator({
     }},
   Survey: {
     screen: Survey
+  },
+  multi: {
+    screen: multiplierSurvey
   },
   QuizPart: {
     screen: QuizPart,
